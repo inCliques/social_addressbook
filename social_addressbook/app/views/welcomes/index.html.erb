@@ -1,4 +1,19 @@
-<h1>Listing welcomes</h1>
+<h1>Welcome!</h1>
 
-<%= link_to 'Sign up', new_user_registration_path %>
-<%= link_to 'Log in', new_user_session_path %>
+<h3>My details</h3>
+
+Name: <%= current_user.phone_number %>
+<br>
+Phone number: <%= current_user.phone_number %>
+<br>
+Email: <%= current_user.email %>
+<br>
+Address: <%= current_user.address %>
+<br>
+<%= link_to 'Edit contact details', edit_user_profile_path %>
+<p>
+
+
+<%= link_to 'Create group', new_group_path %>
+<br>
+<%= link_to 'Account settings', edit_user_registration_path %>

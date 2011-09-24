@@ -13,11 +13,17 @@
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.name %></td>
-    <td><%= group.owner %></td>
+    <% if group.owner == current_user %>
+      <td>Yes</td>
+    <% else %>
+      <td>Yes</td>
+    <% end %>  
+
     <td><%= group.color %></td>
-    <td><%= link_to 'Show', group %></td>
     <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if group.owner == current_user %>
+      <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

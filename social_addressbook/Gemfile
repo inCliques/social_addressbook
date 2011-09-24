@@ -7,6 +7,7 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3'
 gem 'devise', '1.4.7'
+gem 'mysql'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -30,3 +31,8 @@ gem 'devise', '1.4.7'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :development, :test do
+  gem "ruby-debug19"
+end
+

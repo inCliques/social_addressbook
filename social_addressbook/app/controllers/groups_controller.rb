@@ -10,17 +10,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # GET /groups/1
-  # GET /groups/1.xml
-  def show
-    @group = Group.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @group }
-    end
-  end
-
   # GET /groups/new
   # GET /groups/new.xml
   def new
@@ -41,6 +30,9 @@ class GroupsController < ApplicationController
   # POST /groups.xml
   def create
     @group = Group.new(params[:group])
+    @group.owner = current_user
+    require 'ruby-debug'
+    debugger
 
     respond_to do |format|
       if @group.save
@@ -60,7 +52,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to(@group, :notice => 'Group was successfully updated.') }
+        format.html { redirect_to(groups_url, :notice => 'Group was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
