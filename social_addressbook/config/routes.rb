@@ -6,6 +6,7 @@ SocialAddressbook::Application.routes.draw do
   resources :groups do
     member do
       get 'join'
+      post 'join_save'
     end
   end
 

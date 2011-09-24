@@ -21,20 +21,34 @@ class GroupsController < ApplicationController
     end
   end
 
-  # GET /groups/1/join
+  # GET /groups/new
+  # GET /groups/new.xml
   def join
-    @group = Group.find(params[:id])
-    @group.owner = current_user
-    require 'ruby-debug'
-    debugger
+    @groups_user = GroupsUser.new
 
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to(@group, :notice => 'Group was successfully created.') }
+      format.html # join.html.erb
+      format.xml  { render :xml => @groups_user }
+    end
+  end
+
+  # POST /groups/1/join_save
+  def join_save
+    @group = Group.find(params[:id])
+    @groups_user = GroupsUser.new(params[:group])
+    @groups_user.user = current_user
+    @groups_user.group = @group 
+
+    @groups_user.user = current_user
+    @groups_user.group = @group
+
+    respond_to do |format|
+      if @groups_user.save
+        format.html { redirect_to(@group, :notice => 'You joined the group.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @group.errors, :status => :unprocessable_entity }
+        format.html { render :action => "join" }
+        format.xml  { render :xml => @groups_user.errors, :status => :unprocessable_entity }
       end
     end
   end
