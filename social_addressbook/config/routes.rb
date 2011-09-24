@@ -3,7 +3,11 @@ SocialAddressbook::Application.routes.draw do
 
   devise_for :users
 
-  resources :groups
+  resources :groups do
+    member do
+      get 'join'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

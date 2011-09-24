@@ -10,6 +10,36 @@ class GroupsController < ApplicationController
     end
   end
 
+  # GET /groups/1
+  # GET /groups/1.xml
+  def show
+    @group = Group.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @group }
+    end
+  end
+
+  # GET /groups/1/join
+  def join
+    @group = Group.find(params[:id])
+    @group.owner = current_user
+    require 'ruby-debug'
+    debugger
+
+    respond_to do |format|
+      if @group.save
+        format.html { redirect_to(@group, :notice => 'Group was successfully created.') }
+        format.xml  { render :xml => @group, :status => :created, :location => @group }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @group.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+
   # GET /groups/new
   # GET /groups/new.xml
   def new
@@ -31,8 +61,6 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(params[:group])
     @group.owner = current_user
-    require 'ruby-debug'
-    debugger
 
     respond_to do |format|
       if @group.save
@@ -44,6 +72,7 @@ class GroupsController < ApplicationController
       end
     end
   end
+
 
   # PUT /groups/1
   # PUT /groups/1.xml

@@ -5,16 +5,9 @@
   <%= @group.name %>
 </p>
 
-<p>
-  <b>Owner:</b>
-  <%= @group.owner %>
+<p><b>Invitation link:</b><i>Share this URL to invite people to join your clique</i>
+  <%= link_to join_group_url(@group), join_group_path(@group) %>
 </p>
-
-<p>
-  <b>Color:</b>
-  <%= @group.color %>
-</p>
-
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
