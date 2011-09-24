@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  permission_email: false
+  permission_phone_number: false
+  confirmed: false
+
+two:
+  permission_email: false
+  permission_phone_number: false
+  confirmed: false
