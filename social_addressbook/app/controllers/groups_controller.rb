@@ -21,8 +21,19 @@ class GroupsController < ApplicationController
     end
   end
 
-  # GET /groups/new
-  # GET /groups/new.xml
+  # GET /groups/invite
+  # GET /groups/invite.xml
+  def invite
+    @groups_user = GroupsUser.new
+
+    respond_to do |format|
+      format.html # join.html.erb
+      format.xml  { render :xml => @groups_user }
+    end
+  end
+
+  # GET /groups/join
+  # GET /groups/join.xml
   def join
     @groups_user = GroupsUser.new
 
