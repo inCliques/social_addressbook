@@ -1,4 +1,6 @@
 SocialAddressbook::Application.routes.draw do
+  resources :welcomes
+
   devise_for :users
 
   resource :groups
