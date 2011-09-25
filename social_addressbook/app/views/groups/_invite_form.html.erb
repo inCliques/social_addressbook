@@ -26,12 +26,5 @@
 <% end %>
 <%= link_to 'Finish', group_path(@group) %>
 
-<% if @group.offline_users.count > 0 %>
-  <h3>Invited members:</h3> 
-  <% @group.offline_users.each do |offline_user| %>
-    <%= offline_user.name %> (<%= offline_user.email %>) </br>
-  <% end %>
-<% end %>
-</br>
 
 
