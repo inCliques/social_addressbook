@@ -47,13 +47,13 @@ class GroupsController < ApplicationController
 
       if (not error)
         GroupsOfflineUser.create(:offline_user => @offline_user, :group => @group)
-
-        # Sending email invitation
-        @link = new_user_registration_path+'?email='+@offline_user.email
       end
     else
       GroupsUser.create(:user => User.where(:email => params[:offline_user][:email]).first, :group => @group)
     end
+
+    # Sending email invitation
+    InviteMailer.send_invitation(current_user, @group, params[:offline_user][:email]).deliver  
 
     respond_to do |format|
       if not error 
