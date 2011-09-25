@@ -1,13 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Clique name:</b>
   <%= @group.name %>
 </p>
 
-<p><b>Invitation link:</b><i>Share this URL to invite people to join your clique</i>
-  <%= link_to join_group_url(@group), join_group_path(@group) %>
+<p><b>Invitation link:</b>  <%= link_to join_group_url(@group), join_group_path(@group) %> <i>Share this URL to invite people to join your clique</i>
+
 </p>
+
+<h3>Verified members</h3>
+<% @group.users.each do |user| %>
+  Name: <%= user.name %></br>
+  E-Mail: <%= user.email %></br>
+  Phone number: <%= user.phone_number %></br>
+<% end %>
+
+<p>
+
+<h3>Unverified members</h3>
+<% @group.offline_users.each do |user| %>
+  Name: <%= user.name %></br>
+  E-Mail: <%= user.email %></br>
+  Phone number: <%= user.phone_number %></br></br>
+<% end %>
+
+<p>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

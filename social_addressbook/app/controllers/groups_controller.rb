@@ -110,7 +110,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to(@group, :notice => 'Group was successfully created.') }
+        format.html { redirect_to(invite_group_path(@group), :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }
