@@ -1,4 +1,4 @@
-<%= form_for(:groups_user, :url => { :class => "group", :action => "join_save" }) do |f| %>
+<%= semantic_form_for(:groups_user, :url => { :class => "group", :action => "join_save" }) do |f| %>
   <% if @groups_user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@groups_user.errors.count, "error") %> prohibited this user from joining this group:</h2>
@@ -11,15 +11,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Share e-mail?" %>
-    <%= f.check_box :permission_email %>
-  </div>
-  <div class="field">
-    <%= f.label "Share phone_number?" %>
-    <%= f.check_box :permission_phone_number %>
-  </div>
-  <div class="button primary">
-    <%= f.submit 'Join clique' %>
-  </div>
+  <%= f.input :permission_email, :as => :boolean, :label => "Share e-mail?" %>
+  <%= f.input :permission_phone_number, :as => :boolean, :label => "Share phone_number?" %>
+  <%= f.commit_button :label => "Join clique", :button_html => { :class => "button primary" } %>
+
 <% end %>
