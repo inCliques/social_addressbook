@@ -3,7 +3,7 @@ SocialAddressbook::Application.routes.draw do
 
   resources :welcomes
 
-  devise_for :users, :controllers => { :registrations => "users/registrations" }
+  devise_for :users#, :controllers => { :registrations => "users/registrations" }
 
   resources :groups do
     member do
