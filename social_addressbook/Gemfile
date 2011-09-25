@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'devise', '1.4.7'
 gem 'mysql'
 gem 'cancan'
+gem 'formtastic'
 
 # Use unicorn as the web server
 # gem 'unicorn'
