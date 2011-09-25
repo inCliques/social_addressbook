@@ -32,6 +32,7 @@ GEM
     arel (2.0.10)
     bcrypt-ruby (3.0.1)
     builder (2.1.2)
+    cancan (1.6.5)
     columnize (0.3.4)
     devise (1.4.7)
       bcrypt-ruby (~> 3.0)
@@ -95,6 +96,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
   devise (= 1.4.7)
   mysql
   rails (= 3.0.9)
