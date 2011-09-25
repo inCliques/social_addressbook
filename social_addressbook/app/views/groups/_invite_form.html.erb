@@ -1,0 +1,41 @@
+<%= form_for(:offline_user, :url => { :class => "group", :action => "invite_save" }) do |f| %>
+  <% if @offline_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@offline_user.errors.count, "error") %> prohibited this member from being invited into this clique:</h2>
+
+      <ul>
+      <% @offline_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field  :email %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.text_field  :phone_number %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Invite to clique' %>
+  </div>
+<% end %>
+<%= link_to 'Finish', group_path(@group) %>
+
+<% if @group.offline_users.count > 0 %>
+  <h3>Invited members:</h3> 
+  <% @group.offline_users.each do |offline_user| %>
+    <%= offline_user.name %> (<%= offline_user.email %>) </br>
+  <% end %>
+<% end %>
+</br>
+
+

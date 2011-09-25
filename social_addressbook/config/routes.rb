@@ -8,6 +8,7 @@ SocialAddressbook::Application.routes.draw do
       get 'join'
       post 'join_save'
       get 'invite'
+      post 'invite_save'
     end
   end
 

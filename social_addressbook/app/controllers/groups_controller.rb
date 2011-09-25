@@ -24,11 +24,32 @@ class GroupsController < ApplicationController
   # GET /groups/invite
   # GET /groups/invite.xml
   def invite
-    @groups_user = GroupsUser.new
+    @group = Group.find(params[:id])
+    @offline_user = OfflineUser.new
 
     respond_to do |format|
-      format.html # join.html.erb
-      format.xml  { render :xml => @groups_user }
+      format.html # invite.html.erb
+      format.xml  { render :xml => @offline_user }
+    end
+  end
+
+  # POST /groups/1/invite_save
+  def invite_save
+    @group = Group.find(params[:id])
+    @offline_user = OfflineUser.new(params[:offline_user])
+
+    respond_to do |format|
+      if @offline_user.save
+        @groups_offline_user = GroupsOfflineUser.new()
+        @groups_offline_user.offline_user = @offline_user
+        @groups_offline_user.group = @group 
+        @groups_offline_user.save
+        format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was send.') }
+        format.xml  { render :xml => @group, :status => :created, :location => @group }
+      else
+        format.html { render :action => "invite" }
+        format.xml  { render :xml => @groups_user.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
