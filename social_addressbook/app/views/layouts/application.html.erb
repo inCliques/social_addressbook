@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome</title>
+  <title>Welcome to InClique</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+    <div id="grandParent">
+        <div id="parent">
+            <div id="header">
+				<div id="CompanyLogo">
+					
+				</div>
+				<span>
+					<% if user_signed_in? %>
+						Signed in as <b> <%= current_user.email %></b>. Not you?
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+					<% end %>
+				</span>
+			</div>
+            <div id="main-screen">
+				<% if user_signed_in? %>
+					<div id="left_panel">
+						<ul>
+							<li>
+								<%= link_to "Home", welcomes_path %>
+							</li>
+							<li>
+								<%= link_to "Cliques List", groups_path %>
+							</li>
+							<li>
+								<%= link_to "Create a Clique", new_group_path %>
+							</li>
+							<li>
+								<%= link_to "Profile", pages_profile_path %>
+							</li>
+						</ul>
+					</div>
+				<% end %>
+				<div id="right_panel">	
+					<%= yield %>
 
-<div id="user_nav">
-  <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-  <% end %>
-</div>
-
-<%= yield %>
-
+				</div>
+			</div>
+			<div class="clear_both">
+			</div>
+			<div id="bottom_panel">
+				Copy Rights 2011. All Rights Reserved
+			</div>
+		</div>
+	</div>
 </body>
 </html>
