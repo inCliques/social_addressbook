@@ -22,11 +22,11 @@
             <% end %>  
 
             <td><%= group.color %></td>
-            <td><%= link_to 'Show', group_path(group) %></td>
+            <td><%= link_to 'Show', group_path(group), :class => 'button icon log' %></td>
  
-              <td><%= link_to 'Edit', edit_group_path(group)%></td>
+            <td><%= link_to 'Edit', edit_group_path(group), :class => 'button icon edit' %></td>
             <% if group.owner == current_user %>
-              <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete %></td>
+              <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete, :class => 'button danger icon remove' %></td>
             <% end %>
           </tr>
           <% end %>
@@ -34,5 +34,5 @@
 
       <br />
     </div>
-    <%= link_to 'New Group', new_group_path %>
+    <%= link_to 'New Clique', new_group_path, :class => 'button primary icon add' %>
 </div>

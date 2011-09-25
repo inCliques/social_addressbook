@@ -1,17 +1,7 @@
 <div class="centerAligned">
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-      <h1>Welcome to inCliques</h1>
-      <br/>
-      <ul>
-        <li>
-          <%= link_to 'Create a Clique', new_group_path %>
-        </li>
-        <li>
-          <%= link_to 'Clique List', groups_path %>
-        </li>
-      </ul> 
+  <h1>Welcome to inCliques</h1>
+  <ul class="button-group">
+    <li> <%= link_to 'Create a Clique', new_group_path, :class => 'button primary' %> </li>
+    <li> <%= link_to 'Clique List', groups_path, :class => 'button' %> </li>
+  </ul>
 </div>
