@@ -1,34 +1,38 @@
-<h1>Listing groups</h1>
+<div class="centerAligned">
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Owner</th>
-    <th>Color</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <h1>Your Cliques</h1>
 
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.name %></td>
-    <% if group.owner == current_user %>
-      <td>Yes</td>
-    <% else %>
-      <td>Yes</td>
-    <% end %>  
+    <br/>
+    <div class="outerDiv">
+      <div class="innerDiv">
+        <table>
+          <tr>
+            <th >Name</th>
+            <th>Owner</th>
+            <th>Color</th>
+          </tr>
 
-    <td><%= group.color %></td>
-    <td><%= link_to 'Show', group_path(group) %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <% if group.owner == current_user %>
-      <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
+          <% @groups.each do |group| %>
+          <tr>
+            <td><%= group.name %></td>
+            <% if group.owner == current_user %>
+              <td>Yes</td>
+            <% else %>
+              <td>Yes</td>
+            <% end %>  
 
-<br />
+            <td><%= group.color %></td>
+            <td><%= link_to 'Show', group_path(group) %></td>
+ 
+              <td><%= link_to 'Edit', edit_group_path(group)'%></td>
+            <% if group.owner == current_user %>
+              <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete %></td>
+            <% end %>
+          </tr>
+          <% end %>
+          </table>
 
-<%= link_to 'New Group', new_group_path %>
+      <br />
+    </div>
+    <%= link_to 'New Group', new_group_path %>
+</div>

@@ -1,16 +1,17 @@
-<h1>Welcome!</h1>
-
-<h3>My details</h3>
-
-Name: <%= current_user.name %>
-<br>
-Phone number: <%= current_user.phone_number %>
-<br>
-Email: <%= current_user.email %>
-<br>
-<%= link_to 'Edit profile', edit_user_registration_path %>
-<p>
-<br>
-<%= link_to 'Create group', new_group_path %>
-<br>
-<%= link_to 'List groups', groups_path %>
+<div class="centerAligned">
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+      <h1>Welcome to inCliques</h1>
+      <br/>
+      <ul>
+        <li>
+          <%= link_to 'Create a Clique', new_group_path %>
+        </li>
+        <li>
+          <%= link_to 'Clique List', groups_path %>
+        </li>
+      </ul> 
+</div>

@@ -1,10 +1,70 @@
-body { background-color: #fff; color: #333; }
+
+/* Common tag elements */
+*
+{
+    padding: 0;
+    margin: 0;
+}
+a
+{
+    border: none;
+    text-decoration: none;
+}
+
+a img
+{
+    border: none;
+}
+
+html
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 { color:#1C37AC; }
+
+/* Site Structure */
+
+#grandParent
+{
+    position: relative;
+    width: 1000px;
+    margin: 0px auto 0px auto;
+}
+#parent
+{
+    position: relative;
+    width: 1000px;
+    margin: 0 auto 0 auto;
+}
+#header
+{
+    float: left;
+    height: 150px;
+    width: 100%;
+    background-color:#EEEEEE;
+}
+#main-screen
+{
+    position: relative;
+    width: 100%;
+    min-height: 426px;
+    float: left;
+}
+
+/* End of structure */
+
+/* Default Classes from Ruby */
+/*body { background-color: #fff; color: #333; }*/
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
 }
+
 
 pre {
   background-color: #eee;
@@ -14,7 +74,7 @@ pre {
 
 a { color: #000; }
 a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:hover { color: #fff; /*background-color:#000; */}
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -54,3 +114,65 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+/* End of default Classes from Ruby */
+
+/* New Classes */
+
+#CompanyLogo
+{
+    float: left;
+    width: 300px;
+    height: 165px;
+    z-index: 1100;
+    background: url("../images/logo.jpg") no-repeat scroll 0 0 transparent;
+  
+ /*   background: url("../public/images/logo.jpg") no-repeat scroll 0 0 transparent;*/
+}
+
+/* Top Panel classes  */
+#header span { margin:5px 10px 0 0; float:right;}
+
+/* End of top panel */
+
+/* Left Panel classes  */
+#left_panel { background-color: #FFEEDD; min-width:170px; max-width:170px; float:left; min-height:520px;}
+#left_panel ul { margin: 50px 0 0 0; float:right;}
+#left_panel ul li { color:Red; list-style:none; background-color:#BF6402; margin-bottom:5px; width:150px;}
+#left_panel ul li:hover { background-color:#1C37AC;}
+#left_panel a { color: #FFFFFF; padding: 2px 10px 2px 5px; margin:5px 0 5px 0;}
+#left_panel a:visited { color: #FFFFFF; }
+#left_panel a:hover { color: #fff; }
+/* End of Left Panel classes  */
+
+
+/* Right Panel classes  */
+#right_panel { padding:10px 10px 10px 20px; background-color:#FFFFFF; min-height:500px;}
+/* End of Right Panel classes  */
+
+/* Bottom Panel classes  */
+#bottom_panel { background-color:#1C37AC; color:#FFFFFF; text-align:center;}
+/* End of Bottom Panel classes  */
+
+/* Main Screen */
+
+#main_screen { position:relative;}
+/* End of Main Screen */
+
+/* Helper Classes */
+.clear_both { clear:both; }
+
+/* End of Helper Classes */
+
+
+.centerAligned { text-align:center; font:#EEEEEE;}
+.centerAligned ul li { list-style:none; }
+.centerAligned il li a { padding:2px 10px 2px 10px; background-color:Blue;}                        
+
+
+.outerDiv { width:500px; height:500px; overflow:scroll; border: solid 2px #000000;}
+.innerDiv { width:450px; }
+
+.temp { color:Red;}
+
+/* End of new classes */

@@ -1,4 +1,6 @@
 SocialAddressbook::Application.routes.draw do
+  get "pages/profile"
+
   resources :welcomes
 
   devise_for :users
