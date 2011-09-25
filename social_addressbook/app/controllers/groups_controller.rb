@@ -36,19 +36,25 @@ class GroupsController < ApplicationController
   # POST /groups/1/invite_save
   def invite_save
     @group = Group.find(params[:id])
-    @offline_user = OfflineUser.new(params[:offline_user])
+    error = false
 
-    respond_to do |format|
-      if @offline_user.save
-        @groups_offline_user = GroupsOfflineUser.new()
-        @groups_offline_user.offline_user = @offline_user
-        @groups_offline_user.group = @group 
-        @groups_offline_user.save
+    # Check if the invited user is already in the system
+    if User.where(:email => params[:offline_user][:email]).count  == 0
+      @offline_user = OfflineUser.new(params[:offline_user])
+      error = error or @offline_user.save
+
+      if (not error)
+        GroupsOfflineUser.create(:offline_user => @offline_user, :group => @group)
 
         # Sending email invitation
         @link = new_user_registration_path+'?email='+@offline_user.email
-        # TODO
+      end
+    else
+      GroupsUser.create(:user => User.where(:email => params[:offline_user][:email]).first, :group => @group)
+    end
 
+    respond_to do |format|
+      if not error 
         format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was send.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
@@ -115,6 +121,9 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
+        # We make the owner part of the group
+        GroupsUser.create(:user => current_user, :group => @group)
+    
         format.html { redirect_to(invite_group_path(@group), :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
