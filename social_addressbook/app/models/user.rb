@@ -11,4 +11,19 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :groups_users
   has_many :owners, :class_name => "Groups"
 
+  after_create :import_cliques
+
+
+  def import_cliques
+    # If this user already exists as offline user, import all cliques 
+    OfflineUser.where(:email => self.email).each do |offline_user|
+      offline_user.groups.each do |group|  
+        require 'ruby-debug'
+        debugger
+        GroupsUser.create(:user => self, :group => group)
+      end
+    end
+
+  end
+
 end

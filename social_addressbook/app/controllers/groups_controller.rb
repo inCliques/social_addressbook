@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.all
+    @groups = current_user.groups
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +44,11 @@ class GroupsController < ApplicationController
         @groups_offline_user.offline_user = @offline_user
         @groups_offline_user.group = @group 
         @groups_offline_user.save
+
+        # Sending email invitation
+        @link = new_user_registration_path+'?email='+@offline_user.email
+        # TODO
+
         format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was send.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
