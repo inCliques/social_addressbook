@@ -13,15 +13,17 @@
     <div id="grandParent">
         <div id="parent">
             <div id="header">
+				<div id="top_header">
+					<span>
+						<% if user_signed_in? %>
+							Signed in as <b> <%= current_user.email %></b>. Not you?
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+						<% end %>
+					</span>
+				</div>
 				<div id="CompanyLogo">
 					
 				</div>
-				<span>
-					<% if user_signed_in? %>
-						Signed in as <b> <%= current_user.email %></b>. Not you?
-						<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-					<% end %>
-				</span>
 			</div>
             <div id="main-screen">
 				<% if user_signed_in? %>
@@ -42,6 +44,7 @@
 						</ul>
 					</div>
 				<% end %>
+				<div class="right_spacer"></div>
 				<div id="right_panel">	
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>

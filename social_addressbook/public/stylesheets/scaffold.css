@@ -42,10 +42,17 @@ h1, h2, h3 { color:#1C37AC; }
 #header
 {
     float: left;
-    height: 150px;
+    height: 110px;
     width: 100%;
-    background-color:#EEEEEE;
+    background-color:#FFFFFF;
 }
+#top_header
+{
+    height: 25px;
+    background-color:#EEEEEE;
+    border-bottom: ridge 2px #444444;
+}
+
 #main-screen
 {
     position: relative;
@@ -123,20 +130,20 @@ div.field, div.actions {
 {
     float: left;
     width: 300px;
-    height: 165px;
+    height: 85px;
     z-index: 1100;
-    background: url("../images/logo.jpg") no-repeat scroll 0 0 transparent;
+    background: url("../images/logo.png") no-repeat scroll 0 0 transparent;
   
  /*   background: url("../public/images/logo.jpg") no-repeat scroll 0 0 transparent;*/
 }
 
 /* Top Panel classes  */
-#header span { margin:5px 10px 0 0; float:right;}
+#top_header span { margin:5px 10px 0 0; float:right;}
 
 /* End of top panel */
 
 /* Left Panel classes  */
-#left_panel { background-color: #FFEEDD; min-width:170px; max-width:170px; float:left; min-height:520px;}
+#left_panel { background-color: #EEEEEE; min-width:170px; max-width:170px; float:left; min-height:520px; border-right: solid 10px #FFFFFF;}
 #left_panel ul { margin: 50px 0 0 0; float:right;}
 #left_panel ul li { color:Red; list-style:none; background-color:#BF6402; margin-bottom:5px; width:150px;}
 #left_panel ul li:hover { background-color:#1C37AC;}
@@ -147,7 +154,8 @@ div.field, div.actions {
 
 
 /* Right Panel classes  */
-#right_panel { padding:10px 10px 10px 20px; background-color:#FFFFFF; min-height:500px;}
+#right_panel { padding:10px 10px 10px 20px; background-color:#EEEEEE; min-height:500px;}
+.right_spacer { width:40px; float:left; min-width:40px; min-height:500px;}
 /* End of Right Panel classes  */
 
 /* Bottom Panel classes  */
@@ -170,9 +178,17 @@ div.field, div.actions {
 .centerAligned il li a { padding:2px 10px 2px 10px; background-color:Blue;}                        
 
 
-.outerDiv { width:500px; height:500px; overflow:scroll; border: solid 2px #000000;}
+.outerDiv { width:500px; height:500px; overflow:scroll; border: solid 1px #CCCCCC;}
 .innerDiv { width:450px; }
 
 .temp { color:Red;}
 
+.tableHeader { font-weight:800;}
+.firstColumn { width:100px; float:left;}
+.secondColumn { width:100px; float:left;}
+.thirdColumn { width:80px; float:left;}
+.forthColumn { width:80px; float: left;}
+.fifthColumn { width:80px; float: left;}
+
+#addressBook {float:right; height:64px; width:64px; margin:10px 20px 10px 0; background: url("../images/AddressBook.png") no-repeat scroll 0 0 transparent;}
 /* End of new classes */
