@@ -1,38 +1,40 @@
 <div class="centerAligned">
 
-    <h1>Your Cliques</h1>
+  <h1>Your Cliques</h1>
 
-    <br/>
-    <div class="outerDiv">
-      <div class="innerDiv">
-        <table>
+  <br/>
+  <div class="outerDiv">
+    <div class="innerDiv">
+      <table>
+        <%#<tr>%>
+          <%#<th >Name</th>%>
+          <%#<th>Owner</th>%>
+          <%#<th>Color</th>%>
+          <%#</tr>%>
+
+        <% @groups.each do |group| %>
           <tr>
-            <th >Name</th>
-            <th>Owner</th>
-            <th>Color</th>
-          </tr>
-
-          <% @groups.each do |group| %>
-          <tr>
-            <td><%= group.name %></td>
-            <% if group.owner == current_user %>
-              <td>Yes</td>
-            <% else %>
-              <td>Yes</td>
-            <% end %>  
-
-            <td><%= group.color %></td>
-            <td><%= link_to 'Show', group_path(group), :class => 'button icon log' %></td>
- 
-            <td><%= link_to 'Edit', edit_group_path(group), :class => 'button icon edit' %></td>
-            <% if group.owner == current_user %>
-              <td><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete, :class => 'button danger icon remove' %></td>
-            <% end %>
-          </tr>
+            <td style="color:<%= group.color %>;vertical-align:middle"><%= group.name %>
+              <ul class="button-group">
+                <li><button class="button primary icon user">
+                  <% if group.owner == current_user %>
+                    Yes
+                  <% else %>
+                    No
+                  <% end %>
+                </button>
+                </li>
+                <li><%= link_to 'Show', group_path(group), :class => 'button primary icon log' %></li>
+                <li><%= link_to 'Edit', edit_group_path(group), :class => 'button primary icon edit' %></li>
+                <% if group.owner == current_user %>
+                  <li><%= link_to 'Delete group', group, :confirm => 'Are you sure?', :method => :delete, :class => 'button primary danger icon remove' %></li>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
-          </table>
+        </table>
 
-      <br />
+      </div>
+      <%= link_to 'New Clique', new_group_path, :class => 'button primary icon add' %>
     </div>
-    <%= link_to 'New Clique', new_group_path, :class => 'button primary icon add' %>
-</div>
+  </div>
