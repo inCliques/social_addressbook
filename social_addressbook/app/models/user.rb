@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :owners, :class_name => "Groups"
   has_and_belongs_to_many :roles
 
-  after_create :import_cliques
+  after_create :import_cliques, :set_default_role
 
 
   def import_cliques
@@ -23,11 +23,14 @@ class User < ActiveRecord::Base
       end
       offline_user.destroy
     end
+  end
 
+  def set_default_role
+    RolesUser.create(:user_id => self.id, :role_id => Role.where(:name => 'customer').first.id)
   end
 
   def role?(role)
-    return !!self.roles.find_by_name(role.to_s.camelize)
+    return self.roles.find_by_name(role).try(:name) == role.to_s
   end
 
 end

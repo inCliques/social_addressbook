@@ -3,7 +3,7 @@ SocialAddressbook::Application.routes.draw do
 
   resources :welcomes
 
-  devise_for :users#, :controllers => { :registrations => "users/registrations" }
+  devise_for :users
 
   resources :groups do
     member do
@@ -63,7 +63,7 @@ SocialAddressbook::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "groups#index"
+  root :to => "welcomes#index"
 
   # See how all your routes lay out with "rake routes"
 
