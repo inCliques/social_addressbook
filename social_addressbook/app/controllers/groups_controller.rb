@@ -44,18 +44,19 @@ class GroupsController < ApplicationController
 
     # Check if the invited user is already in the system
     if User.where(:email => params[:offline_user][:email]).count  == 0
-      @offline_user = OfflineUser.new(params[:offline_user])
-      error = error or @offline_user.save
+      @invitee = OfflineUser.new(params[:offline_user])
+      error = error or @invitee.save
 
       if (not error)
-        GroupsOfflineUser.create(:offline_user => @offline_user, :group => @group)
+        GroupsOfflineUser.create(:offline_user => @invitee, :group => @group)
       end
     else
-      GroupsUser.create(:user => User.where(:email => params[:offline_user][:email]).first, :group => @group)
+      @invitee = User.where(:email => params[:offline_user][:email]).first
+      GroupsUser.create(:user => @invitee, :group => @group)
     end
 
     # Sending email invitation
-    InviteMailer.send_invitation(current_user, @group, params[:offline_user][:email]).deliver  
+    InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
 
     respond_to do |format|
       if not error 
