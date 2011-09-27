@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if not error 
-        format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was send.') }
+        format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was sent.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "invite" }
