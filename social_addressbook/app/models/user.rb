@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :groups_users
   has_many :owners, :class_name => "Groups"
   has_and_belongs_to_many :roles
+  has_many :user_data, :dependent => :destroy
 
-  after_create :import_cliques, :set_default_role
+  after_create :import_cliques, :set_default_role, :create_default_data_fields
 
 
   def import_cliques
@@ -31,6 +32,10 @@ class User < ActiveRecord::Base
 
   def role?(role)
     return self.roles.find_by_name(role).try(:name) == role.to_s
+  end
+
+  def create_default_data_fields
+    UserDatum.create(:user_id => self.id, :type_id => DataType.where(:name => 'Name').first.id, :name => DataType.where(:name => 'Name').first.name)
   end
 
 end

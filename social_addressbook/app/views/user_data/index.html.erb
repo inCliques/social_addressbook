@@ -1,0 +1,27 @@
+<h1>Listing user_data</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>Verified</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_data.each do |user_datum| %>
+  <tr>
+    <td><%= user_datum.name %></td>
+    <td><%= user_datum.value %></td>
+    <td><%= user_datum.verified %></td>
+    <td><%= link_to 'Show', user_datum %></td>
+    <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+    <td><%= link_to 'Destroy', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User datum', new_user_datum_path %>

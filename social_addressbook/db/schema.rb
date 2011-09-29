@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110925111415) do
+ActiveRecord::Schema.define(:version => 20110929180949) do
+
+  create_table "data_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -57,6 +63,16 @@ ActiveRecord::Schema.define(:version => 20110925111415) do
     t.integer "user_id"
   end
 
+  create_table "user_data", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "data_type_id"
+    t.string   "name"
+    t.string   "value"
+    t.boolean  "verified"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
@@ -71,8 +87,6 @@ ActiveRecord::Schema.define(:version => 20110925111415) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "name"
-    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

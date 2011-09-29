@@ -1,0 +1,12 @@
+<%= semantic_form_for @user_datum do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :data_type, :as => :select, :collection => DataType.find(:all) %>
+    <%= f.input :name %>
+    <%= f.input :value %>
+    <%= f.input :verified %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

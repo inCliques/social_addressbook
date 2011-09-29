@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user_datum.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @user_datum.value %>
+</p>
+
+<p>
+  <b>Verified:</b>
+  <%= @user_datum.verified %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_datum_path(@user_datum) %> |
+<%= link_to 'Back', user_data_path %>
