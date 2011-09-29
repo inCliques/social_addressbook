@@ -79,11 +79,20 @@ class UserDataController < ApplicationController
   # DELETE /user_data/1.xml
   def destroy
     @user_datum = UserDatum.find(params[:id])
-    @user_datum.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(user_data_url) }
-      format.xml  { head :ok }
+    if @user_datum.data_type.name == 'Name'
+      @user_datum.errors[:base] = "Can not delete name."
+      respond_to do |format|
+        format.html { redirect_to(user_data_url) }
+        format.xml  { head :ok }
+      end
+    else
+      @user_datum.destroy
+      respond_to do |format|
+        format.html { redirect_to(user_data_url) }
+        format.xml  { head :ok }
+      end
     end
+
   end
 end
