@@ -14,6 +14,10 @@ class Ability
       can [:update, :invite, :invite_save, :destroy], Group do |group|
         group.try(:owner) == user
       end
+      can :create, UserDatum
+      can [:manage], UserDatum do |user_datum|
+        user_datum.try(:user) == user
+      end
     end
   end
 end

@@ -6,7 +6,7 @@ class UserDataController < ApplicationController
   # GET /user_data
   # GET /user_data.xml
   def index
-    @user_data = UserDatum.all
+    @user_data = current_user.user_data
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,6 +29,7 @@ class UserDataController < ApplicationController
   # GET /user_data/new.xml
   def new
     @user_datum = UserDatum.new
+    @user_datum.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +46,7 @@ class UserDataController < ApplicationController
   # POST /user_data.xml
   def create
     @user_datum = UserDatum.new(params[:user_datum])
+    @user_datum.user = current_user
 
     respond_to do |format|
       if @user_datum.save
