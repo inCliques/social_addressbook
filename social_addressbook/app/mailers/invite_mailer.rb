@@ -1,5 +1,5 @@
 class InviteMailer < ActionMailer::Base
-  default :from => "info@cliequ.es"
+  default :from => "no-reply@incliqu.es"
 
   def send_invitation(inviter, invitee, group)
     @link = new_user_registration_url+'?email='+invitee.email
