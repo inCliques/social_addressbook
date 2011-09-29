@@ -1,4 +1,8 @@
 class UserDataController < ApplicationController
+  before_filter :authenticate_user!
+  check_authorization
+  load_and_authorize_resource
+
   # GET /user_data
   # GET /user_data.xml
   def index

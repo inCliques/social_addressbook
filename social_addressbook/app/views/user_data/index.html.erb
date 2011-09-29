@@ -1,26 +1,36 @@
 <h1>Listing user_data</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Verified</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<br>
+<% DataType.find(:all).each do |data_type|  %>
 
-<% @user_data.each do |user_datum| %>
-  <tr>
-    <td><%= user_datum.name %></td>
-    <td><%= user_datum.value %></td>
-    <td><%= user_datum.verified %></td>
-    <td><%= link_to 'Show', user_datum %></td>
-    <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
-    <td><%= link_to 'Destroy', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <h2><%= data_type.name %></h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Verified</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @user_data.each do |user_datum| %>
+    <% if user_datum.data_type != data_type 
+    next 
+  end %>
+    <tr>
+      <td><%= user_datum.name %></td>
+      <td><%= user_datum.value %></td>
+      <td><%= user_datum.verified %></td>
+      <td><%= link_to 'Show', user_datum %></td>
+      <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+      <td><%= link_to 'Destroy', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br>
+
 <% end %>
-</table>
 
 <br />
 

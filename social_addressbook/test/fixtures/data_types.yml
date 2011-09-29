@@ -12,5 +12,5 @@ phone_number:
 twitter:
   name: Twitter 
 
-custom:
-  name: Custom 
+other:
+  name: Other 
