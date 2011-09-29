@@ -7,6 +7,9 @@ class UserDataController < ApplicationController
   # GET /user_data.xml
   def index
     @user_data = current_user.user_data
+    @name = DataType.find(:all, :conditions => { :name => 'Name' })
+
+    @data_types = DataType.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb

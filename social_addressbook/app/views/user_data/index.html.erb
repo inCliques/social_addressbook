@@ -1,7 +1,7 @@
-<h1>Listing user_data</h1>
+<h1>Listing user data</h1>
 
 <br>
-<% DataType.find(:all).each do |data_type|  %>
+<% @data_types.each do |data_type|  %>
 
   <h2><%= data_type.name %></h2>
   <table>
@@ -16,8 +16,8 @@
 
   <% @user_data.each do |user_datum| %>
     <% if user_datum.data_type != data_type 
-    next 
-  end %>
+          next 
+       end %>
     <tr>
       <td><%= user_datum.name %></td>
       <td><%= user_datum.value %></td>
