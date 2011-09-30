@@ -1,4 +1,4 @@
-<h1><%= @user_datum_name.name %></h1>
+<h1><%= @user_datum_name.value %></h1><%= link_to 'Edit', edit_user_datum_path(@user_datum_name) %>
 <br>
 <% @data_types.each do |data_type|  %>
 

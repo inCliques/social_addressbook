@@ -33,6 +33,7 @@ class UserDataController < ApplicationController
   # GET /user_data/new.xml
   def new
     @user_datum = UserDatum.new
+    @user_datum.data_type_id = DataType.first( :conditions => { :name => 'Email' } ).id
     @user_datum.user = current_user
 
     respond_to do |format|

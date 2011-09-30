@@ -1,6 +1,8 @@
 <%= semantic_form_for @user_datum do |f| %>
   <%= f.inputs do %>
-    <%= f.input :data_type, :as => :select, :collection => DataType.find(:all) %>
+    <% if @user_datum.data_type.name != 'Name' %>
+      <%= f.input :data_type, :as => :select, :collection => DataType.where("NOT name == 'Name'") %>
+    <% end %>
     <%= f.input :name %>
     <%= f.input :value %>
     <%= f.input :verified %>
