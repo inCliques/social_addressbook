@@ -7,7 +7,8 @@ class UserDataController < ApplicationController
   # GET /user_data.xml
   def index
     @user_data = current_user.user_data
-    @name = DataType.find(:all, :conditions => { :name => 'Name' })
+    name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
+    @user_datum_name = current_user.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id})
 
     @data_types = DataType.find(:all)
 

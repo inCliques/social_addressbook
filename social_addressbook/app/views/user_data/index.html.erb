@@ -1,8 +1,10 @@
-<h1>Listing user data</h1>
-
+<h1><%= @user_datum_name.name %></h1>
 <br>
 <% @data_types.each do |data_type|  %>
 
+  <% if data_type.name == 'Name' 
+    next 
+   end %>
   <h2><%= data_type.name %></h2>
   <table>
     <tr>
@@ -15,6 +17,7 @@
     </tr>
 
   <% @user_data.each do |user_datum| %>
+
     <% if user_datum.data_type != data_type 
           next 
        end %>
