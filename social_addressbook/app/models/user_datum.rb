@@ -4,14 +4,25 @@ class UserDatum < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :data_type
-#  validate :no_name
+  before_save :unique_name
+  before_destroy :keep_name
 
-  def no_name
+  def unique_name
+    if self.data_type.name=='Name'
+      name_id = DataType.first( :conditions => { :name => 'Name' } ).id
+      if self.user.user_data.find(:all, :conditions => { :data_type_id => name_id }).count>0
+        errors[:base] << "Can only create one name."
+        return  false
+      end
+    end
+    return true
+  end
+
+  def keep_name
     if self.data_type.name='Name'
-      errors[:base] << "Can not create another name."
+      errors[:base] << "Can not delete name."
       return  false
     end
-    true
   end
 
 end

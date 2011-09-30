@@ -84,9 +84,8 @@ class UserDataController < ApplicationController
     @user_datum = UserDatum.find(params[:id])
 
     if @user_datum.data_type.name == 'Name'
-      @user_datum.errors[:base] = "Can not delete name."
       respond_to do |format|
-        format.html { redirect_to(user_data_url) }
+        format.html { redirect_to(user_data_url, :alert => 'Can not delete name.') }
         format.xml  { head :ok }
       end
     else

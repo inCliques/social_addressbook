@@ -1,5 +1,13 @@
 <h1>Editing user_datum</h1>
 
+<% if @user_datum.errors.any? %>
+  <ul>
+    <% @user_datum.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Show', @user_datum %> |
