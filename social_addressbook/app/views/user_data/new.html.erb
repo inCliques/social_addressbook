@@ -1,5 +1,12 @@
 <h1>New <%= @user_datum.data_type.name %> account</h1>
 <br>
+<% if @user_datum.errors.any? %>
+  <ul>
+    <% @user_datum.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= render 'form' %>
 

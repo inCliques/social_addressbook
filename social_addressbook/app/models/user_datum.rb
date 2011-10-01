@@ -9,7 +9,7 @@ class UserDatum < ActiveRecord::Base
   before_update :unique_name_update, :do_not_save_verified_data
   before_create :unique_name_create
   before_destroy :keep_name
-  validate :no_empty_name
+  validate :no_empty_value
 
   def self.name_options
     return Hash["Email" => ['Personal', 'Work'], 
@@ -54,9 +54,9 @@ class UserDatum < ActiveRecord::Base
     end
   end
 
-  def no_empty_name
+  def no_empty_value
     if (self.value.nil? or self.value.empty?)
-      errors[:base] << "Can not have emtpy name."
+      errors[:base] << "Can not have emtpy value."
       return false
     else
       return true

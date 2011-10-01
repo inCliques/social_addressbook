@@ -33,9 +33,8 @@ class UserDataController < ApplicationController
   # GET /user_data/new.xml
   def new
     @user_datum = UserDatum.new
-    @name_options = UserDatum.name_options
     @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
-    @user_datum.name = @name_options[0] 
+    @user_datum.name = UserDatum.name_options[0] 
     @user_datum.user = current_user
 
     respond_to do |format|
@@ -47,7 +46,6 @@ class UserDataController < ApplicationController
   # GET /user_data/1/edit
   def edit
     @user_datum = UserDatum.find(params[:id])
-    @name_options = UserDatum.name_options
   end
 
   # POST /user_data
@@ -73,7 +71,6 @@ class UserDataController < ApplicationController
   # PUT /user_data/1.xml
   def update
     @user_datum = UserDatum.find(params[:id])
-    @name_options = UserDatum.name_options
 
     respond_to do |format|
       if @user_datum.update_attributes(params[:user_datum])

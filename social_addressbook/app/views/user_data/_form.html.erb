@@ -1,7 +1,7 @@
 <%= semantic_form_for @user_datum do |f| %>
   <%= f.inputs do %>
     <%= f.input :data_type_id, :as => :hidden %>
-    <%= f.input :name, :as => :radio, :collection => @name_options[@user_datum.data_type.name], :required => true, :label => false %>
+    <%= f.input :name, :as => :radio, :collection => UserDatum.name_options[@user_datum.data_type.name], :required => true, :label => false %>
     <%= f.input :value, :label => false %>
   <% end %>
 
