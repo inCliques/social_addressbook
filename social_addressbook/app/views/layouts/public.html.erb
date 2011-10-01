@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>inCliques</title>
+	<%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'formtastic' %>
+  <!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
+  <!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+<!-- Container for entire page -->
+<div id="contain-all">
+	
+	<div id="userbar">
+		<div class="centered960">
+		<span id="usrstatus"> </span>
+		</div>
+		
+	</div>
+	<div id="logo-panel">&nbsp; </div>
+	
+	<div id="contain960" class="centered960">
+		<div id="logo"><h1>inCliques</h1></div>
+		
+			<div id="side-content" class="boxstyle1">
+				<h1>Sign In </h1>
+				<%= yield %>
+			</div>
+		
+		<div id="main-content" class="boxstyle1"><h1>I'm a Title!</h1>Placeholder</div>
+		<div class="clearfix">&nbsp;</div>
+		</div>
+		
+		
+		
+		
+	</div>
+	
+</div>
+<!-- Container for footer -->
+<div id="contain-footer">
+	<div id="footer">
+		<div id="popup">Some Text for you</div>
+	</div>
+	
+</div>
+
+</body>
+</html>

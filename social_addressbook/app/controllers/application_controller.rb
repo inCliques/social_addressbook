@@ -1,4 +1,6 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base 
+ layout :determine_layout
+
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -13,4 +15,11 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-end
+
+  private
+  def determine_layout
+    current_user ? "private" : "public"
+  end
+  
+  
+  end
