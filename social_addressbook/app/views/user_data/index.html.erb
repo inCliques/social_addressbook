@@ -35,9 +35,13 @@
     </tr>
   <% end %>
   </table>
-  <%= link_to "Add #{data_type.name} account", new_user_datum_path(:type => data_type.name) %>
-  <br>
-  <br>
+	<% if data_type.name == 'Viadeo'%>
+		<%= link_to 'Viadeo Connect', :controller => :viadeo_connect, :action => :step1 %>
+	<% else %>
 
+  <%= link_to "Add #{data_type.name} account", new_user_datum_path(:type => data_type.name) %>
+<% end %>
+  <br>
+  <br>
 <% end %>
 

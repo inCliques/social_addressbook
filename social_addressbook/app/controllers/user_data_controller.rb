@@ -3,6 +3,7 @@ class UserDataController < ApplicationController
   check_authorization
   load_and_authorize_resource
 
+
   # GET /user_data
   # GET /user_data.xml
   def index
@@ -29,6 +30,13 @@ class UserDataController < ApplicationController
     end
   end
 
+  def automatic_new
+    @user_datum = UserDatum.new
+    @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
+    @user_datum.name = UserDatum.name_options[0]
+    @user_datum.user = current_user
+  end
+
   # GET /user_data/new
   # GET /user_data/new.xml
   def new
@@ -36,10 +44,17 @@ class UserDataController < ApplicationController
     @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
     @user_datum.name = UserDatum.name_options[0] 
     @user_datum.user = current_user
+    if params[:value] then
+      @user_datum.value = params[:value]
+      @user_datum.verified = true
+      @user_datum.save
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user_datum }
+      redirect_to :action => :index
+    else
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @user_datum }
+      end
     end
   end
 
@@ -101,4 +116,6 @@ class UserDataController < ApplicationController
     end
 
   end
+
+
 end

@@ -12,7 +12,8 @@ class UserDatum < ActiveRecord::Base
   validate :no_empty_value
 
   def self.name_options
-    return Hash["Email" => ['Personal', 'Work'], 
+    return Hash["Email" => ['Personal', 'Work'],
+                "Viadeo" => ['ProfileURL'],
                 "Twitter" => ['Public', 'Private'],
                 "Phone" => ['Personal', 'Work', 'Mobile', 'Fax'], 
                 "Address" => ['Personal', 'Work'], 
