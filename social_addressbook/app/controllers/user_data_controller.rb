@@ -3,6 +3,14 @@ class UserDataController < ApplicationController
   check_authorization
   load_and_authorize_resource
 
+  def name_options
+    return Hash["Email" => ['Personal', 'Work'], 
+                "Twitter" => ['Public', 'Private'],
+                "Phone" => ['Personal', 'Work', 'Mobile', 'Fax'], 
+                "Address" => ['Personal', 'Work'], 
+                "Name" => []] 
+  end
+
   # GET /user_data
   # GET /user_data.xml
   def index
@@ -33,7 +41,9 @@ class UserDataController < ApplicationController
   # GET /user_data/new.xml
   def new
     @user_datum = UserDatum.new
-    @user_datum.data_type_id = DataType.first( :conditions => { :name => 'Email' } ).id
+    @name_options = name_options()
+    @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
+    @user_datum.name = @name_options[0] 
     @user_datum.user = current_user
 
     respond_to do |format|
@@ -45,6 +55,7 @@ class UserDataController < ApplicationController
   # GET /user_data/1/edit
   def edit
     @user_datum = UserDatum.find(params[:id])
+    @name_options = name_options()
   end
 
   # POST /user_data
@@ -55,7 +66,7 @@ class UserDataController < ApplicationController
 
     respond_to do |format|
       if @user_datum.save
-        format.html { redirect_to(@user_datum, :notice => 'User datum was successfully created.') }
+        format.html { redirect_to(user_data_url, :notice => "#{@user_datum.data_type.name} was successfully created.") }
         format.xml  { render :xml => @user_datum, :status => :created, :location => @user_datum }
       else
         format.html { render :action => "new" }
@@ -68,10 +79,11 @@ class UserDataController < ApplicationController
   # PUT /user_data/1.xml
   def update
     @user_datum = UserDatum.find(params[:id])
+    @name_options = name_options()
 
     respond_to do |format|
       if @user_datum.update_attributes(params[:user_datum])
-        format.html { redirect_to(@user_datum, :notice => 'User datum was successfully updated.') }
+        format.html { redirect_to(user_data_url, :notice => "#{@user_datum.data_type.name} was successfully updated.") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -85,13 +97,12 @@ class UserDataController < ApplicationController
   def destroy
     @user_datum = UserDatum.find(params[:id])
 
-    if @user_datum.data_type.name == 'Name'
+    if not @user_datum.destroy
       respond_to do |format|
-        format.html { redirect_to(user_data_url, :alert => 'Can not delete name.') }
+        format.html { redirect_to(user_data_url, :alert => @user_datum.errors) }
         format.xml  { head :ok }
       end
     else
-      @user_datum.destroy
       respond_to do |format|
         format.html { redirect_to(user_data_url) }
         format.xml  { head :ok }

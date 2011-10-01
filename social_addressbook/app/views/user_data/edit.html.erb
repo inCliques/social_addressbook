@@ -1,4 +1,4 @@
-<h1>Editing user_datum</h1>
+<h1>Editing <%= @user_datum.data_type.name %></h1>
 
 <% if @user_datum.errors.any? %>
   <ul>
@@ -10,5 +10,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @user_datum %> |
 <%= link_to 'Back', user_data_path %>

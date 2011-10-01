@@ -8,6 +8,8 @@ class UserDatum < ActiveRecord::Base
   before_create :unique_name_create
   before_destroy :keep_name
 
+  validate :no_empty_name
+
   def unique_name_update
     return unique_name(1)
   end
@@ -28,9 +30,18 @@ class UserDatum < ActiveRecord::Base
   end
 
   def keep_name
-    if self.data_type.name='Name'
+    if self.data_type.name=='Name'
       errors[:base] << "Can not delete name."
       return  false
+    end
+  end
+
+  def no_empty_name
+    if (self.value.nil? or self.value.empty?)
+      errors[:base] << "Can not have emtpy name."
+      return false
+    else
+      return true
     end
   end
 
