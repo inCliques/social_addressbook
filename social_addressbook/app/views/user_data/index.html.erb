@@ -28,7 +28,9 @@
       <td><%= user_datum.name %></td>
       <td><%= user_datum.value %></td>
       <td><%= user_datum.verified %></td>
-      <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+      <% if not user_datum.verified %>
+        <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+      <% end %>
       <td><%= link_to 'Delete', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
