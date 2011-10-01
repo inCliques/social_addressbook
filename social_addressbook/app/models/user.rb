@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
 
   after_create :import_cliques, :set_default_role, :create_default_data_fields
 
+  def name
+    name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
+    return self.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id}).value
+  end
 
   def import_cliques
     # If this user already exists as offline user, import all cliques 
