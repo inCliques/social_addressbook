@@ -1,5 +1,5 @@
 Hi <%= @invitee.name %>,
-<%= @inviter.name %> has added you to their <%= @group.name %> Clique.
+<%= @inviter_name %> has added you to their <%= @group.name %> Clique.
 They have shared these details with other members of the <%= @group.name %> Clique:
 
 Your Name: <%= @invitee.name %>
@@ -7,9 +7,9 @@ Your email: <%= @invitee.email %>
 
 If you would like to change what information you share with the <%= @group.name %> Clique, sign-in and adjust your settings <%= link_to "here", @link %>.
 
-If you'd like to be removed from this Clique, please email <%= @inviter.name %> at <%= @inviter.email %>.
+If you'd like to be removed from this Clique, please email <%= @inviter_name %> at <%= @inviter.email %>.
 
-If you don't know <%= @inviter.name %>, please email us at info@incliqu.es and we will remove you from his Clique.
+If you don't know <%= @inviter_name %>, please email us at info@incliqu.es and we will remove you from his Clique.
 
 Kind regards
 The inCliqu.es Team
