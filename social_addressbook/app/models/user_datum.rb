@@ -1,14 +1,32 @@
 class UserDatum < ActiveRecord::Base
+ attr_accessible :name, :value
+
   belongs_to :user
   belongs_to :data_type
 
   validates_presence_of :user
   validates_presence_of :data_type
-  before_update :unique_name_update
+  before_update :unique_name_update, :do_not_save_verified_data
   before_create :unique_name_create
   before_destroy :keep_name
-
   validate :no_empty_name
+
+  def self.name_options
+    return Hash["Email" => ['Personal', 'Work'], 
+                "Twitter" => ['Public', 'Private'],
+                "Phone" => ['Personal', 'Work', 'Mobile', 'Fax'], 
+                "Address" => ['Personal', 'Work'], 
+                "Name" => []] 
+  end
+
+  def do_not_save_verified_data
+    if self.verified
+      errors[:base] << "Can not change verified data."
+      return  false
+    else
+      return true
+    end
+  end
 
   def unique_name_update
     return unique_name(1)

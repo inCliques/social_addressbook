@@ -3,14 +3,6 @@ class UserDataController < ApplicationController
   check_authorization
   load_and_authorize_resource
 
-  def name_options
-    return Hash["Email" => ['Personal', 'Work'], 
-                "Twitter" => ['Public', 'Private'],
-                "Phone" => ['Personal', 'Work', 'Mobile', 'Fax'], 
-                "Address" => ['Personal', 'Work'], 
-                "Name" => []] 
-  end
-
   # GET /user_data
   # GET /user_data.xml
   def index
@@ -41,7 +33,7 @@ class UserDataController < ApplicationController
   # GET /user_data/new.xml
   def new
     @user_datum = UserDatum.new
-    @name_options = name_options()
+    @name_options = UserDatum.name_options
     @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
     @user_datum.name = @name_options[0] 
     @user_datum.user = current_user
@@ -55,14 +47,16 @@ class UserDataController < ApplicationController
   # GET /user_data/1/edit
   def edit
     @user_datum = UserDatum.find(params[:id])
-    @name_options = name_options()
+    @name_options = UserDatum.name_options
   end
 
   # POST /user_data
   # POST /user_data.xml
   def create
     @user_datum = UserDatum.new(params[:user_datum])
+    @user_datum.data_type_id = params[:user_datum][:data_type_id]
     @user_datum.user = current_user
+    @user_datum.verified = false
 
     respond_to do |format|
       if @user_datum.save
@@ -79,7 +73,7 @@ class UserDataController < ApplicationController
   # PUT /user_data/1.xml
   def update
     @user_datum = UserDatum.find(params[:id])
-    @name_options = name_options()
+    @name_options = UserDatum.name_options
 
     respond_to do |format|
       if @user_datum.update_attributes(params[:user_datum])

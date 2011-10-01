@@ -35,7 +35,18 @@ class User < ActiveRecord::Base
   end
 
   def create_default_data_fields
-    UserDatum.create(:user_id => self.id, :data_type_id => DataType.where(:name => 'Name').first.id, :name => DataType.where(:name => 'Name').first.name, :value => 'Edit my name')
+    user_datum = UserDatum.new(:value => 'Edit my name')
+    user_datum.user_id = self.id
+    user_datum.data_type_id = DataType.where(:name => 'Name').first.id
+    user_datum.verified = false
+    user_datum.save
+
+    user_datum = UserDatum.new(:name => UserDatum.name_options()['Email'][0], :value => self.email)
+    user_datum.user_id = self.id
+    user_datum.data_type_id = DataType.where(:name => 'Email').first.id
+    user_datum.verified = true
+    user_datum.save
+
   end
 
 end
