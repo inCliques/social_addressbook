@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20110929180949) do
     t.string   "name"
     t.integer  "owner_id"
     t.string   "color"
+    t.boolean  "private",    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
