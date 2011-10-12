@@ -35,6 +35,8 @@ GEM
     builder (2.1.2)
     cancan (1.6.5)
     columnize (0.3.4)
+    configatron (2.8.3)
+      yamler (>= 0.1.0)
     devise (1.4.7)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -94,6 +96,7 @@ GEM
     tzinfo (0.3.29)
     warden (1.0.5)
       rack (>= 1.0)
+    yamler (0.1.0)
 
 PLATFORMS
   ruby
@@ -101,6 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
+  configatron
   devise (= 1.4.7)
   formtastic
   rails (= 3.0.9)
