@@ -5,7 +5,7 @@
 <% if (@group.offline_users.count + @group.users.count) > 1 %>
   <h3>Invited members:</h3> 
   <% @group.offline_users.each do |offline_user| %>
-    <%= offline_user.name %> (<%= offline_user.email %>) </br>
+    <%= offline_user.offline_user_data.first.value %> </br>
   <% end %>
   <% @group.users.each do |user| %>
     <% if user != current_user %>
