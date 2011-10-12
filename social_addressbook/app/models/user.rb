@@ -13,21 +13,37 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :user_data, :dependent => :destroy
 
-  after_create :import_cliques, :set_default_role, :create_default_data_fields
+  after_create :import_cliques, :set_default_role, :create_default_data_fields # TODO: import_clique should be called after_verification instead after_create
 
   def name
     name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
-    return self.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id}).value
+    self.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id}).value
   end
 
+  def find_datum_of_type(type_name)
+    data_type_id = DataType.first(:conditions => { :name => type_name }).id
+    self.user_data.find(:all, :conditions => {:data_type_id => data_type_id})
+  end
+
+  def has_datum_of_type(type_name)
+    data_type_id = DataType.first(:conditions => { :name => type_name }).id
+    self.user_data.first(:all, :conditions => {:data_type_id => data_type_id}).count > 0
+  end
+
+  # If this user already exists as an offline user, import all cliques 
   def import_cliques
-    # If this user already exists as offline user, import all cliques 
-    OfflineUser.where(:email => self.email).each do |offline_user|
-      offline_user.groups.each do |group|  
-        GroupsUser.create(:user => self, :group => group)
-      end
-      offline_user.destroy
-    end
+    email_data_type_id = DataType.first(:conditions => { :name => 'Email' }).id
+    email_data = UserDatum.where(:value => 'self.email', :data_type_id => email_data_type_id)
+    require 'ruby-debug'
+    debugger
+
+    # TODO
+    #OfflineUser.where(:email => self.email).each do |offline_user|
+    #  offline_user.groups.each do |group|  
+    #    GroupsUser.create(:user => self, :group => group)
+    #  end
+    #  offline_user.destroy
+    #end
   end
 
   def set_default_role

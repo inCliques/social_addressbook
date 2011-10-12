@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  offline_user_id: 1
+  data_type_id: 1
+  name: MyString
+  value: MyString
+
+two:
+  offline_user_id: 1
+  data_type_id: 1
+  name: MyString
+  value: MyString

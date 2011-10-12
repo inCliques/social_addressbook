@@ -30,6 +30,7 @@ class GroupsController < ApplicationController
   def invite
     @group = Group.find(params[:id])
     @offline_user = OfflineUser.new
+    @user_datum = UserDatum.new
 
     respond_to do |format|
       format.html # invite.html.erb
@@ -40,31 +41,47 @@ class GroupsController < ApplicationController
   # POST /groups/1/invite_save
   def invite_save
     @group = Group.find(params[:id])
-    error = false
 
-    # Check if the invited user is already in the system
-    if User.where(:email => params[:offline_user][:email]).count  == 0
-      @invitee = OfflineUser.new(params[:offline_user])
-      error = error or @invitee.save
-
-      if (not error)
-        GroupsOfflineUser.create(:offline_user => @invitee, :group => @group)
-      end
-    else
-      @invitee = User.where(:email => params[:offline_user][:email]).first
+    # Check if the invited user is already registered in the system
+    if UserDatum.where(:value => params[:user_datum][:value], :data_type_id => params[:user_datum][:data_type_id]).count > 0
+      # In this case we add the associated person to the clique
+      @invitee = UserDatum.where(:value => params[:user_datum][:value], :data_type_id => params[:user_datum][:data_type_id]).first.user
       GroupsUser.create(:user => @invitee, :group => @group)
+
+      # We also want to notify the user that he was added to the clique
+      if @user_datum.has_datum_of_type('Email')
+        InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
+      end
+
+    else
+
+      # Otherwise, we create an offline account for him 
+      @invitee = OfflineUser.create
+      # Add the personal information to this user
+      @user_datum = OfflineUserDatum.new(params[:user_datum])
+      @user_datum.data_type_id = params[:user_datum][:data_type_id]
+      @user_datum.offline_user_id = @invitee.id
+      @user_datum.save
+      # And add him to the clique
+      GroupsOfflineUser.create(:offline_user => @invitee, :group => @group)
+
+      # In case an email was provided, we also send an email invitation to join incliques
+      if @user_datum.data_type.name == 'Email'
+        InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
+      end
+
     end
 
-    # Sending email invitation
-    InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
+    require 'ruby-debug'
+    debugger
 
     respond_to do |format|
-      if not error 
-        format.html { redirect_to(invite_group_path(@group), :notice => 'Invitation was sent.') }
+      if @user_datum.errors.length.zero?
+        format.html { redirect_to(invite_group_path(@group), :notice => 'Person succesfully invited.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "invite" }
-        format.xml  { render :xml => @groups_user.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @user_datum.errors, :status => :unprocessable_entity }
       end
     end
   end
