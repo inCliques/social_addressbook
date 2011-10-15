@@ -1,41 +1,33 @@
-<div class="centerAligned">
+<h2>My cliques</h2>
+<table>
+<% @my_groups.each do |group| %>
+  <tr>
+    <td>
+      <%= link_to group.name, group_path(group) %>
+    </td>
+    <td>
+        <% if group.owner == current_user %>
+        <% end %>
+    </td>
+    </tr>
+  <% end %>
+</table>
 
-  <div class="outerDiv">
-    <div class="innerDiv">
+</br>
 
-        <h2>My cliques</h2>
-       <table>
-        <% @my_groups.each do |group| %>
-          <tr>
-            <td>
-              <%= link_to group.name, group_path(group) %>
-            </td>
-            <td>
-                <% if group.owner == current_user %>
-                <% end %>
-            </td>
-            </tr>
-          <% end %>
-        </table>
+<h2>Other cliques</h2>
+<table>
+<% @groups.each do |group| %>
+  <tr>
+    <td>
+      <%= link_to group.name, group_path(group) %>
+    </td>
+    <td>
+        <% if group.owner == current_user %>
+        <% end %>
+    </td>
+    </tr>
+  <% end %>
 
-        </br>
+</table>
 
-        <h2>Other cliques</h2>
-       <table>
-        <% @groups.each do |group| %>
-          <tr>
-            <td>
-              <%= link_to group.name, group_path(group) %>
-            </td>
-            <td>
-                <% if group.owner == current_user %>
-                <% end %>
-            </td>
-            </tr>
-          <% end %>
-
-        </table>
-
-      </div>
-    </div>
-  </div>
