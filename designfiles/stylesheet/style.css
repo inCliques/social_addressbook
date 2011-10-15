@@ -62,11 +62,6 @@ width: 600px;
 height: 60px;
 }
 
-/*All text and content goes here*/
-#bodycontent{
-padding: 10px;
-}
-
 /* 
  inCliques Building Blocks
  @Author: Minn Soe [inCliques]
@@ -92,10 +87,37 @@ padding: 10px;
 	border-bottom-left-radius: 10px;
 }
 
-#wide-box {
-	width: 970px;
-	height: 300px;
-	padding: 5px;
+.wide-box, .side-box, .main-box {
+	padding: 10px;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+/* All boxes have 10 px padding inside, define and remove if needed.
+ * The box model calculates padding so if removed must add difference to width.
+ */
+.wide-box {
+	float: left;
+	width: 960px;
 	background-color: #FFF;
 }
 
+.side-box {
+	float: left;
+	width: 174px;
+	background-color: #fff;
+	margin-right: 10px;
+}
+.main-box {
+	float: left;
+	width:756px;
+	background-color: #fff;
+  
+}
+.margin-10 {
+	margin-top: 10px;
+}
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
