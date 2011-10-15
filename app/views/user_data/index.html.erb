@@ -25,7 +25,8 @@ table.editUserProfile td {
 }
 </style>
 
-<h1>User profile of <%= current_user.name %> </h1>
+<h1>Profile of <%= current_user.name %> </h1>
+<%= link_to "Change password", edit_user_registration_path %>
 
 
 <br>
