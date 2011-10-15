@@ -10,6 +10,7 @@ gem 'devise', '1.4.7'
 gem 'cancan'
 gem 'formtastic'
 gem 'configatron'
+#gem "squeel"
 
 # Use unicorn as the web server
 # gem 'unicorn'

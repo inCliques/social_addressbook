@@ -6,7 +6,9 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = current_user.groups
+    @groups = current_user.groups.where("private IS NOT 0 AND owner_id IS NOT ?", current_user.id)
+    @my_groups = current_user.groups.where(:owner_id => current_user.id)
+
 
     respond_to do |format|
       format.html # index.html.erb
