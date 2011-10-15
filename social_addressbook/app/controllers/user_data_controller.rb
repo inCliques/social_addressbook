@@ -8,9 +8,6 @@ class UserDataController < ApplicationController
   # GET /user_data.xml
   def index
     @user_data = current_user.user_data
-    name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
-    @user_datum_name = current_user.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id})
-
     @data_types = DataType.find(:all)
 
     respond_to do |format|
@@ -28,13 +25,6 @@ class UserDataController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @user_datum }
     end
-  end
-
-  def automatic_new
-    @user_datum = UserDatum.new
-    @user_datum.data_type_id = DataType.first( :conditions => { :name => params["type"] } ).id
-    @user_datum.name = UserDatum.name_options[0]
-    @user_datum.user = current_user
   end
 
   # GET /user_data/new
@@ -73,7 +63,7 @@ class UserDataController < ApplicationController
 
     respond_to do |format|
       if @user_datum.save
-        format.html { redirect_to(user_data_url, :notice => "#{@user_datum.data_type.name} was successfully created.") }
+        format.html { redirect_to(user_data_url) }
         format.xml  { render :xml => @user_datum, :status => :created, :location => @user_datum }
       else
         format.html { render :action => "new" }
@@ -89,7 +79,7 @@ class UserDataController < ApplicationController
 
     respond_to do |format|
       if @user_datum.update_attributes(params[:user_datum])
-        format.html { redirect_to(user_data_url, :notice => "#{@user_datum.data_type.name} was successfully updated.") }
+        format.html { redirect_to(user_data_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

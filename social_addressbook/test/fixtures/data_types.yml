@@ -1,8 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-myname:
-  name: Name
-
 email:
   name: Email 
 
