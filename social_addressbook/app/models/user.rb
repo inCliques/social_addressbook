@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
 
   def has_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
-    self.user_data.first(:conditions => {:data_type_id => data_type_id}).count > 0
+    self.user_data.find(:all, :conditions => {:data_type_id => data_type_id}).count > 0
   end
 
   def has_verified_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
-    self.user_data.first(:conditions => {:data_type_id => data_type_id, :verified => true}).count > 0
+    self.user_data.find(:all, :conditions => {:data_type_id => data_type_id, :verified => true}).count > 0
   end
 
   # Checks for every verified datum of this person if there is an associated offline profile and imports its cliques.
@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
         groups = offline_datum.offline_user.groups
         
         groups.each do |group| 
-          # Add the user as a member of the clique, but still as unconfirmed.
-          GroupsUser.create(:user_id => self.id, :group_id => group.id, :confirmed => false) 
+          # Add the user as a member of the clique
+          GroupsUser.create(:user_id => self.id, :group_id => group.id) 
         end
 
         # We do not need the offline user any more. Deleting it will also get rid of the OfflineData and OfflineGroupsUser table entries.
