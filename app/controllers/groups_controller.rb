@@ -59,13 +59,14 @@ class GroupsController < ApplicationController
 
     else
 
-      # Otherwise, we create an offline account for this user
-      @invitee = OfflineUser.create
+      # Otherwise, we create an offline account for this user 
+      @invitee = OfflineUser.create(:name => params[:user_datum][:name]) # This is a hack to avoid multiple forms on one page: use the name parameter for a second UserDatum of type name
       # Add the personal information to this user
       @user_datum = OfflineUserDatum.new(params[:user_datum])
       @user_datum.data_type_id = params[:user_datum][:data_type_id]
       @user_datum.offline_user_id = @invitee.id
       @user_datum.save
+
       # And add him to the clique
       GroupsOfflineUser.create(:offline_user => @invitee, :group => @group)
 
@@ -147,7 +148,7 @@ class GroupsController < ApplicationController
         # We make the owner part of the group
         GroupsUser.create(:user => current_user, :group => @group)
     
-        format.html { redirect_to(invite_group_path(@group), :notice => 'Group was successfully created.') }
+        format.html { redirect_to(invite_group_path(@group)) }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }
@@ -164,7 +165,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to(groups_url, :notice => 'Group was successfully updated.') }
+        format.html { redirect_to(groups_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -3,10 +3,14 @@
 <%= render 'invite_form' %>
 
 <% if (@group.offline_users.count + @group.users.count) > 1 %>
+  </br>
+  </br>
   <h3>Invited members:</h3> 
+
   <% @group.offline_users.each do |offline_user| %>
-    <%= offline_user.offline_user_data.first.value %> </br>
+    <%= offline_user.name %> (<%= offline_user.offline_user_data.first.value %>)</br>
   <% end %>
+
   <% @group.users.each do |user| %>
     <% if user != current_user %>
       <%= user.name %> (<%= user.email %>) </br>

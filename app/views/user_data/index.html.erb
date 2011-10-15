@@ -25,8 +25,8 @@ table.editUserProfile td {
 }
 </style>
 
-<h2><%= @user_datum_name.data_type.name %></h2>
-<%= @user_datum_name.value %><%= link_to ' ---->Click here to edit', edit_user_datum_path(@user_datum_name) %>
+<h1>User profile of <%= current_user.name %> </h1>
+
 
 <br>
   <br>

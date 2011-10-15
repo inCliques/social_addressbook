@@ -15,11 +15,6 @@ class User < ActiveRecord::Base
 
   after_create :set_default_role, :create_default_data_fields # TODO: import_clique should be called after_verification instead after_create
 
-  def name
-    name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
-    self.user_data.first(:conditions => {:data_type_id => name_data_type_id}).value
-  end
-
   def find_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
     self.user_data.find(:all, :conditions => {:data_type_id => data_type_id})
@@ -75,12 +70,6 @@ class User < ActiveRecord::Base
   end
 
   def create_default_data_fields
-    user_datum = UserDatum.new(:value => 'Edit my name')
-    user_datum.user_id = self.id
-    user_datum.data_type_id = DataType.where(:name => 'Name').first.id
-    user_datum.verified = false
-    user_datum.save
-
     user_datum = UserDatum.new(:name => UserDatum.name_options()['Email'][0], :value => self.email)
     user_datum.user_id = self.id
     user_datum.data_type_id = DataType.where(:name => 'Email').first.id

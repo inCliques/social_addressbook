@@ -1,30 +1,30 @@
+<% if @offline_user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@offline_user.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
+
+    <ul>
+    <% @offline_user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @offline_user_datum.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@offline_user_datum.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
+
+    <ul>
+    <% @offline_user_datum.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= semantic_form_for(:user_datum, :url => { :class => "group", :action => "invite_save" }) do |f| %>
-  <% if @offline_user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@offline_user.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
-
-      <ul>
-      <% @offline_user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if @offline_user_datum.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@offline_user_datum.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
-
-      <ul>
-      <% @offline_user_datum.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= f.input :data_type_id, :as => :select, :collection => DataType.find(:all)%>
-  <%= f.input :value %>
-  <%= f.commit_button :label => "Invite to clique", :button_html => { :class => "button primary" } %>
-
+  <%= f.input :name, :label => "Name" %>
+  <%= f.input :data_type_id, :label => "Type", :as => :select, :collection => DataType.find(:all) %>
+  <%= f.input :value, :label => "Address" %>
+  <%= f.commit_button :label => "Invite to clique" %>
 <% end %>
