@@ -1,54 +1,54 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<title>inCliques</title>
-	<%= stylesheet_link_tag :all %>
-  <%= stylesheet_link_tag 'formtastic' %>
-  <!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
-  <!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-
-<body>
-<!-- Container for entire page -->
-<div id="contain-all">
-	
-	<div id="userbar">
-		<div class="centered960">
-		<span id="usrstatus"> </span>
-		</div>
-		
-	</div>
-	<div id="logo-panel">&nbsp; </div>
-	
-	<div id="contain960" class="centered960">
-		<div id="logo"><h1>inCliques</h1></div>
-		
-			<div id="side-content" class="boxstyle1">
-				<h1>Sign In </h1>
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-				<%= yield %>
+	<head>
+		<title>inCliques</title>
+		<%= stylesheet_link_tag :all %>
+		<%= stylesheet_link_tag 'formtastic' %>
+		<!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
+		<!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
+		<%= javascript_include_tag :defaults %>
+		<%= csrf_meta_tag %>
+	</head>
+	<!-- Start of body -->
+	<body>
+		<!-- Start of top bar -->
+		<div id="top-bar">
+			<div id="user-info">
+			<p class="notice"><%= notice %></p>
+			<p class="alert"><%= alert %></p>
 			</div>
-		
-		<div id="main-content" class="boxstyle1"><h1>I'm a Title!</h1>Placeholder</div>
-		<div class="clearfix">&nbsp;</div>
 		</div>
 		
+		<!-- Start of container -->
+		<div id="container">
 		
-		
-		
-	</div>
-	
-</div>
-<!-- Container for footer -->
-<div id="contain-footer">
-	<div id="footer">
-		<div id="popup">Some Text for you</div>
-	</div>
-	
-</div>
+			<!-- Start of header -->
+			<header>
+				<div id="header">
+					<div id="logo"><img src="../images/logo.png" alt="inCliques" id="incliques" /></div>
+					<div id="navigation">
+						Navigation would go here, etc
+					</div>
+				</div>
+			</header>
+			<div id="content-container" class="clearfix">
+				<!-- Start of content -->
+				<section>
+					
 
-</body>
+					<div class="wide-box"><h2>Sub Title</h2>
+					<%= yield %>
+					</div>
+
+				</section>
+				
+				<!-- Start of footer -->
+				<footer>
+					<div class="wide-box margin-10">
+					This is supposed to be a footer
+					</div>
+				</footer>
+			</div>
+		</div>
+	</body>
 </html>

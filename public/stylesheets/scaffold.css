@@ -1,10 +1,4 @@
 
-/* Common tag elements */
-*
-{
-    padding: 0;
-    margin: 0;
-}
 a
 {
     border: none;
@@ -16,62 +10,7 @@ a img
     border: none;
 }
 
-html
-{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2, h3 { color:#1C37AC; }
-
-/* Site Structure */
-
-#grandParent
-{
-    position: relative;
-    width: 1000px;
-    margin: 0px auto 0px auto;
-}
-#parent
-{
-    position: relative;
-    width: 1000px;
-    margin: 0 auto 0 auto;
-}
-#header
-{
-    float: left;
-    height: 110px;
-    width: 100%;
-    background-color:#FFFFFF;
-}
-#top_header
-{
-    height: 25px;
-    background-color:#EEEEEE;
-    border-bottom: ridge 2px #444444;
-}
-
-#main-screen
-{
-    position: relative;
-    width: 100%;
-    min-height: 426px;
-    float: left;
-}
-
-/* End of structure */
-
 /* Default Classes from Ruby */
-/*body { background-color: #fff; color: #333; }*/
-
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
-}
-
 
 pre {
   background-color: #eee;
@@ -123,19 +62,6 @@ div.field, div.actions {
 }
 
 /* End of default Classes from Ruby */
-
-/* New Classes */
-
-#CompanyLogo
-{
-    float: left;
-    width: 300px;
-    height: 85px;
-    z-index: 1100;
-    background: url("../images/logo.png") no-repeat scroll 0 0 transparent;
-  
- /*   background: url("../public/images/logo.jpg") no-repeat scroll 0 0 transparent;*/
-}
 
 /* Top Panel classes  */
 #top_header span { margin:5px 10px 0 0; float:right;}
