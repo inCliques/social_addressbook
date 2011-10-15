@@ -4,7 +4,7 @@ class CreateGroups < ActiveRecord::Migration
       t.string :name
       t.integer :owner_id
       t.string :color
-      t.boolean :private, :default => true
+      t.boolean :private, :default => false
 
       t.timestamps
     end
