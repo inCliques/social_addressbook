@@ -1,21 +1,3 @@
-<h2><%= @user_datum_name.data_type.name %></h2>
- <table class="editUserProfile">
-	<tr>
-		<td>
-		<%= @user_datum_name.value %>
-		</td>
-		<td><%= link_to 'Edit', edit_user_datum_path(@user_datum_name) %>
-			</td>
-	</tr>
-</table>
-  <br>
-<% @data_types.each do |data_type|  %>
-
-  <% if data_type.name == 'Name' 
-    next 
-   end %>
-	<tr>  <h2><%= data_type.name %></h2>
-
 <style type="text/css">
 table.editUserProfile {
 	border-width: 1px;
@@ -43,36 +25,47 @@ table.editUserProfile td {
 }
 </style>
 
-  <table class="editUserProfile">
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Verified</th>
-		<td><% if data_type.name == 'Viadeo'%>
-			<%= link_to 'Add Viadeo Profile', :controller => :viadeo_connect, :action => :step1 %>
-		<% else %>
+<h2><%= @user_datum_name.data_type.name %></h2>
+<%= @user_datum_name.value %><%= link_to 'Edit', edit_user_datum_path(@user_datum_name) %>
 
-	  <%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
-	<% end %> </td>
-    </tr>
-
-  <% @user_data.each do |user_datum| %>
-
-    <% if user_datum.data_type != data_type 
-          next 
-       end %>
-    <tr>
-      <td><%= user_datum.name %></td>
-	  <td><%= user_datum.value %></td>
-      <td><%= user_datum.verified %></td>
-      <% if not user_datum.verified %>
-        <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
-      <% end %>
-      <td><%= link_to 'DELETE ME', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
-
-    </tr>
-  <% end %>
-  </table>
-
+<br>
   <br>
- <% end %>
+<% @data_types.each do |data_type|  %>
+
+  <% if data_type.name == 'Name'
+    next
+   end %>
+
+  <% if not @user_data.where(:data_type_id => data_type.id).empty? %>
+	<h2><%= data_type.name %></h2>
+
+		<table class="editUserProfile">
+			<tr>
+				<th>Name</th>
+				<th>Value</th>
+				<th>Verified</th>
+			</tr>
+
+			<% @user_data.where(:data_type_id => data_type.id).each do |user_datum| %>
+
+			<tr>
+				<td><%= user_datum.name %></td>
+				<td><%= user_datum.value %></td>
+				<td><%= user_datum.verified %></td>
+				<% if not user_datum.verified %>
+				<td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+				<% end %>
+				<td><%= link_to 'DELETE ME', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
+			</tr>
+			<% end %>
+		</table>
+  <% end %>
+
+  <% if data_type.name == 'Viadeo'%>
+	<%= link_to 'Add Viadeo Profile', :controller => :viadeo_connect, :action => :step1 %>
+  <% else %>
+	<%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
+  <% end %>
+  <br>
+  <br>
+<% end %>
