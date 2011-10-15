@@ -11,7 +11,7 @@ class OfflineUser < ActiveRecord::Base
 
   def has_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
-    self.offline_user_data.first(:all, :conditions => {:data_type_id => data_type_id}).count > 0
+    self.offline_user_data.find(:all, :conditions => {:data_type_id => data_type_id}).count > 0
   end
 
 end
