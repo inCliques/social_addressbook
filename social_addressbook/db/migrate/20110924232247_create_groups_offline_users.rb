@@ -3,7 +3,6 @@ class CreateGroupsOfflineUsers < ActiveRecord::Migration
     create_table :groups_offline_users do |t|
       t.integer :offline_user_id
       t.integer :group_id
-      t.boolean :confirmed
 
       t.timestamps
     end
