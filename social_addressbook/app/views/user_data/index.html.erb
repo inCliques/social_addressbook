@@ -9,14 +9,39 @@
     next 
    end %>
   <h2><%= data_type.name %></h2>
-  <table>
+
+<style type="text/css">
+table.editUserProfile {
+	border-width: 1px;
+	border-spacing: 3px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+}
+table.editUserProfile th {
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+table.editUserProfile td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+</style>
+
+  <table class="editUserProfile">
     <tr>
       <th>Name</th>
       <th>Value</th>
       <th>Verified</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
 
   <% @user_data.each do |user_datum| %>
@@ -26,20 +51,20 @@
        end %>
     <tr>
       <td><%= user_datum.name %></td>
-      <td><%= user_datum.value %></td>
+	  <td><%= user_datum.value %></td>
       <td><%= user_datum.verified %></td>
       <% if not user_datum.verified %>
         <td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
       <% end %>
-      <td><%= link_to 'Delete', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'DELETE ME', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
   </table>
 	<% if data_type.name == 'Viadeo'%>
-		<%= link_to 'Viadeo Connect', :controller => :viadeo_connect, :action => :step1 %>
+		<%= link_to 'Add Viadeo Profile', :controller => :viadeo_connect, :action => :step1 %>
 	<% else %>
 
-  <%= link_to "Add #{data_type.name} account", new_user_datum_path(:type => data_type.name) %>
+  <%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
 <% end %>
   <br>
   <br>
