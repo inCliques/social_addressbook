@@ -6,9 +6,10 @@ class UserDatum < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :data_type
-  before_update :unique_name_update, :do_not_save_verified_data
+  before_update :unique_name_update, :update_only_unverified_data
   before_create :unique_name_create
   before_destroy :keep_name
+  after_save :import_cliques_from_offline_users, :if => "self.verified"
   validate :no_empty_value
 
   def self.name_options
@@ -20,7 +21,11 @@ class UserDatum < ActiveRecord::Base
                 "Name" => []] 
   end
 
-  def do_not_save_verified_data
+  def import_cliques_from_offline_users
+    self.user.import_cliques
+  end
+
+  def update_only_unverified_data
     if self.verified
       errors[:base] << "Can not change verified data."
       return  false

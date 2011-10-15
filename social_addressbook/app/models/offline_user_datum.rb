@@ -1,5 +1,5 @@
 class OfflineUserDatum < ActiveRecord::Base
- attr_accessible :name, :value
+  attr_accessible :name, :value
 
   belongs_to :offline_user
   belongs_to :data_type
