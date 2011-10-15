@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Clique name:</b>
+<h1>>Clique name:</h1>
   <%= @group.name %>
 <%= link_to 'Edit', edit_group_path(@group), :class => 'button primary icon edit' %>
 <%= link_to 'Delete group', @group, :confirm => 'Are you sure?', :method => :delete, :class => 'button primary danger icon remove' %>
@@ -31,13 +31,16 @@
 
 <h3>Unverified members</h3>
 <% @group.offline_users.each do |user| %>
+  <%= user.name %>
   <% user.offline_user_data.each do |user_data| %>
-    <%= user_data.value %>
+    (<%= user_data.value %>)
     <br>
-   <% end %>
+  <% end %>
+
    </br>
    </br>
 <% end %>
 
 <p>
 
+<%= link_to 'Invite more people', invite_group_path(@group), :class => 'button primary icon edit' %>
