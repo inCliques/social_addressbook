@@ -65,7 +65,7 @@ SocialAddressbook::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  namespace :user do
+  authenticate :user do
     root :to => "groups#index"
   end
   root :to => "welcomes#index"
