@@ -28,7 +28,7 @@
 <h3>Unverified members</h3>
 <% @group.offline_users.each do |user| %>
   <% user.offline_user_data.each do |user_data| %>
-    <%= user_data.data_type.name %>: <%= user_data.value %>
+    <%= user_data.value %>
     <br>
    <% end %>
 <% end %>
