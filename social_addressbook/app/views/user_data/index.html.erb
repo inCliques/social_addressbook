@@ -26,7 +26,7 @@ table.editUserProfile td {
 </style>
 
 <h2><%= @user_datum_name.data_type.name %></h2>
-<%= @user_datum_name.value %><%= link_to 'Edit', edit_user_datum_path(@user_datum_name) %>
+<%= @user_datum_name.value %><%= link_to ' ---->Click here to edit', edit_user_datum_path(@user_datum_name) %>
 
 <br>
   <br>
@@ -37,7 +37,7 @@ table.editUserProfile td {
    end %>
 
   <% if not @user_data.where(:data_type_id => data_type.id).empty? %>
-	<h2><%= data_type.name %></h2>
+	<br><h2><%= data_type.name %></h2>
   
 		<table class="editUserProfile">
 			<tr>
@@ -59,6 +59,7 @@ table.editUserProfile td {
 			</tr>
 			<% end %>
 		</table>
+		<br>
   <% end %>
 
   <% if data_type.name == 'Viadeo'%>
@@ -66,7 +67,6 @@ table.editUserProfile td {
   <% else %>
   	<%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
   <% end %>
-  <br>
   <br>
 <% end %>
 
