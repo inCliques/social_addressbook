@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     if Rails.configuration.database_configuration[Rails.env]["adapter"]=='sqlite3'
       @groups = current_user.groups.where("private IS NOT 0 AND owner_id IS NOT ?", current_user.id)
     else
-      @groups = current_user.groups.where("private IS FALSE AND owner_id IS NOT ?", current_user.id)
+      @groups = current_user.groups.where("private IS FALSE AND owner_id <> ?", current_user.id)
     end
     @my_groups = current_user.groups.where(:owner_id => current_user.id)
 
