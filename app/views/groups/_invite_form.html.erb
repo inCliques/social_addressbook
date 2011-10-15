@@ -10,12 +10,12 @@
   </div>
 <% end %>
 
-<% if @offline_user_datum.errors.any? %>
+<% if @user_datum.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@offline_user_datum.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
+    <h2><%= pluralize(@user_datum.errors.count, "error") %> prohibited this person from being invited into this clique:</h2>
 
     <ul>
-    <% @offline_user_datum.errors.full_messages.each do |msg| %>
+    <% @user_datum.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

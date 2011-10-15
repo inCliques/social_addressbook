@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
   def invite
     @group = Group.find(params[:id])
     @offline_user = OfflineUser.new
-    @offline_user_datum = OfflineUserDatum.new
+    @user_datum = OfflineUserDatum.new
 
     respond_to do |format|
       format.html # invite.html.erb
@@ -56,24 +56,27 @@ class GroupsController < ApplicationController
       if @invitee.has_datum_of_type('Email')
         InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
       end
-
+      
+      # We need a dummy offline user to keep the viewer happy
+      @offline_user = OfflineUser.new
     else
 
       # Otherwise, we create an offline account for this user 
-      @invitee = OfflineUser.create(:name => params[:user_datum][:name]) # This is a hack to avoid multiple forms on one page: use the name parameter for a second UserDatum of type name
+      @offline_user = OfflineUser.create(:name => params[:user_datum][:name]) # This is a hack to avoid multiple forms on one page: use the name parameter for a second UserDatum of type name
       # Add the personal information to this user
       @user_datum = OfflineUserDatum.new(params[:user_datum])
       @user_datum.data_type_id = params[:user_datum][:data_type_id]
-      @user_datum.offline_user_id = @invitee.id
-      @user_datum.save
+      @user_datum.offline_user_id = @offline_user.id
+      
+      if @user_datum.save
+        # In case an email was provided, we also send an email invitation to join incliques
+        if @user_datum.data_type.name == 'Email'
+          InviteMailer.send_invitation(current_user, @offline_user, @group).deliver
+        end
+      end
 
       # And add him to the clique
-      GroupsOfflineUser.create(:offline_user => @invitee, :group => @group)
-
-      # In case an email was provided, we also send an email invitation to join incliques
-      if @user_datum.data_type.name == 'Email'
-        InviteMailer.send_invitation(current_user, @invitee, @group).deliver
-      end
+      GroupsOfflineUser.create(:offline_user => @offline_user, :group => @group)
 
     end
 
@@ -82,6 +85,9 @@ class GroupsController < ApplicationController
         format.html { redirect_to(invite_group_path(@group), :notice => 'Person succesfully invited.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
+        # Something went wrong, so let's get rid of the offline user and its associated data again
+        @offline_user.destroy
+
         format.html { render :action => "invite" }
         format.xml  { render :xml => @user_datum.errors, :status => :unprocessable_entity }
       end

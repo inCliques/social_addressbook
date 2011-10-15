@@ -5,16 +5,8 @@ class OfflineUserDatum < ActiveRecord::Base
   belongs_to :data_type
 
   validates_presence_of :offline_user
-  validates_presence_of :data_type
-  validate :no_empty_value
+  validates_presence_of :data_type, :presence => true
+  validates :value, :length => { :minimum => 3 }, :presence => true
 
-  def no_empty_value
-    if (self.value.nil? or self.value.empty?)
-      errors[:base] << "Can not have emtpy value."
-      return false
-    else
-      return true
-    end
-  end
 
 end
