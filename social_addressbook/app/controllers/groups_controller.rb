@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   def invite
     @group = Group.find(params[:id])
     @offline_user = OfflineUser.new
-    @user_datum = UserDatum.new
+    @offline_user_datum = OfflineUserDatum.new
 
     respond_to do |format|
       format.html # invite.html.erb
@@ -44,18 +44,20 @@ class GroupsController < ApplicationController
 
     # Check if the invited user is already registered in the system
     if UserDatum.where(:value => params[:user_datum][:value], :data_type_id => params[:user_datum][:data_type_id]).count > 0
+
       # In this case we add the associated person to the clique
-      @invitee = UserDatum.where(:value => params[:user_datum][:value], :data_type_id => params[:user_datum][:data_type_id]).first.user
+      @user_datum = UserDatum.where(:value => params[:user_datum][:value], :data_type_id => params[:user_datum][:data_type_id]).first
+      @invitee = @user_datum.user
       GroupsUser.create(:user => @invitee, :group => @group)
 
       # We also want to notify the user that he was added to the clique
-      if @user_datum.has_datum_of_type('Email')
+      if @invitee.has_datum_of_type('Email')
         InviteMailer.send_invitation(current_user, @invitee, @group).deliver  
       end
 
     else
 
-      # Otherwise, we create an offline account for him 
+      # Otherwise, we create an offline account for this user 
       @invitee = OfflineUser.create
       # Add the personal information to this user
       @user_datum = OfflineUserDatum.new(params[:user_datum])
