@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   def name
     name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
-    self.user_data.first(:all, :conditions => {:data_type_id => name_data_type_id}).value
+    self.user_data.first(:conditions => {:data_type_id => name_data_type_id}).value
   end
 
   def find_datum_of_type(type_name)
@@ -32,30 +32,39 @@ class User < ActiveRecord::Base
 
   def has_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
-    self.user_data.first(:all, :conditions => {:data_type_id => data_type_id}).count > 0
+    self.user_data.first(:conditions => {:data_type_id => data_type_id}).count > 0
   end
 
   def has_verified_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
-    self.user_data.first(:all, :conditions => {:data_type_id => data_type_id, :verified => true}).count > 0
+    self.user_data.first(:conditions => {:data_type_id => data_type_id, :verified => true}).count > 0
   end
 
   # Checks for every verified datum of this person if there is an associated offline profile and imports its cliques.
-#  def import_cliques
-#    verified_data = self.user_data.find(:all, :conditions => {:verified => true)
-#    email_data_type_id = DataType.first(:conditions => { :name => 'Email' }).id
-#    email_data = UserDatum.where(:value => 'self.email', :data_type_id => email_data_type_id)
-#    require 'ruby-debug'
-#    debugger
+  def import_cliques
+    verified_data = self.user_data.find(:all, :conditions => {:verified => true})
 
-    # TODO
-    #OfflineUser.where(:email => self.email).each do |offline_user|
-    #  offline_user.groups.each do |group|
-    #    GroupsUser.create(:user => self, :group => group)
-    #  end
-    #  offline_user.destroy
-    #end
-#  end
+    verified_data.each do |datum|
+      # Check if there is an offline user with this datum
+      offline_datum = OfflineUserDatum.first(:conditions => {:value => datum.value, :data_type_id => datum.data_type_id})
+
+      while not offline_datum.nil?
+        # We just found an associated offline user, so let's import its cliques
+        groups = offline_datum.offline_user.groups
+
+        groups.each do |group|
+          # Add the user as a member of the clique, but still as unconfirmed.
+          GroupsUser.create(:user_id => self.id, :group_id => group.id, :confirmed => false)
+        end
+
+        # We do not need the offline user any more. Deleting it will also get rid of the OfflineData and OfflineGroupsUser table entries.
+        offline_datum.offline_user.destroy
+
+        offline_datum = OfflineUserDatum.first(:conditions => {:value => datum.value, :data_type_id => datum.data_type_id})
+      end
+
+    end
+  end
 
   def set_default_role
     RolesUser.create(:user_id => self.id, :role_id => Role.where(:name => 'customer').first.id)

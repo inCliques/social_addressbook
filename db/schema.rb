@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20111012204333) do
   create_table "groups_offline_users", :force => true do |t|
     t.integer  "offline_user_id"
     t.integer  "group_id"
-    t.boolean  "confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,8 +37,6 @@ ActiveRecord::Schema.define(:version => 20111012204333) do
   create_table "groups_users", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
-    t.boolean  "permission_email"
-    t.boolean  "permission_phone_number"
     t.boolean  "confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
