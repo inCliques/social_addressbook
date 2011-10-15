@@ -72,9 +72,6 @@ class GroupsController < ApplicationController
 
     end
 
-    require 'ruby-debug'
-    debugger
-
     respond_to do |format|
       if @user_datum.errors.length.zero?
         format.html { redirect_to(invite_group_path(@group), :notice => 'Person succesfully invited.') }

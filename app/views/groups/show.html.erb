@@ -3,11 +3,13 @@
 <p>
   <b>Clique name:</b>
   <%= @group.name %>
+<%= link_to 'Edit', edit_group_path(@group), :class => 'button primary icon edit' %>
 </p>
 
 <p><b>Invitation link:</b>  <%= link_to join_group_url(@group), join_group_path(@group) %> <i>Share this URL to invite people to join your clique</i>
 
 </p>
+</br>
 
 <h3>Verified members</h3>
 <% @group.users.each do |user| %>
@@ -21,11 +23,15 @@
 
 <p>
 
+</br>
+
 <h3>Unverified members</h3>
 <% @group.offline_users.each do |user| %>
-  Name: <%= user.name %></br>
+  <% user.offline_user_data.each do |user_data| %>
+    <%= user_data.data_type.name %>: <%= user_data.value %>
+    <br>
+   <% end %>
 <% end %>
 
 <p>
 
-<%= link_to 'Edit', edit_group_path(@group), :class => 'button primary icon edit' %>

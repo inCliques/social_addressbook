@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :user_data, :dependent => :destroy
 
-  after_create :import_cliques, :set_default_role, :create_default_data_fields # TODO: import_clique should be called after_verification instead after_create
+  after_create :set_default_role, :create_default_data_fields # TODO: import_clique should be called after_verification instead after_create
 
   def name
     name_data_type_id = DataType.first(:conditions => { :name => 'Name' }).id
@@ -25,17 +25,28 @@ class User < ActiveRecord::Base
     self.user_data.find(:all, :conditions => {:data_type_id => data_type_id})
   end
 
+  def find_verified_datum_of_type(type_name)
+    data_type_id = DataType.first(:conditions => { :name => type_name }).id
+    self.user_data.find(:all, :conditions => {:data_type_id => data_type_id, :verified => true})
+  end
+
   def has_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
     self.user_data.first(:all, :conditions => {:data_type_id => data_type_id}).count > 0
   end
 
-  # If this user already exists as an offline user, import all cliques
-  def import_cliques
-    email_data_type_id = DataType.first(:conditions => { :name => 'Email' }).id
-    email_data = UserDatum.where(:value => 'self.email', :data_type_id => email_data_type_id)
-    require 'ruby-debug'
-    debugger
+  def has_verified_datum_of_type(type_name)
+    data_type_id = DataType.first(:conditions => { :name => type_name }).id
+    self.user_data.first(:all, :conditions => {:data_type_id => data_type_id, :verified => true}).count > 0
+  end
+
+  # Checks for every verified datum of this person if there is an associated offline profile and imports its cliques.
+#  def import_cliques
+#    verified_data = self.user_data.find(:all, :conditions => {:verified => true)
+#    email_data_type_id = DataType.first(:conditions => { :name => 'Email' }).id
+#    email_data = UserDatum.where(:value => 'self.email', :data_type_id => email_data_type_id)
+#    require 'ruby-debug'
+#    debugger
 
     # TODO
     #OfflineUser.where(:email => self.email).each do |offline_user|
@@ -44,7 +55,7 @@ class User < ActiveRecord::Base
     #  end
     #  offline_user.destroy
     #end
-  end
+#  end
 
   def set_default_role
     RolesUser.create(:user_id => self.id, :role_id => Role.where(:name => 'customer').first.id)
