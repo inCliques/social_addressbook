@@ -126,6 +126,7 @@ table.editUserProfile td {
 		</table>
 		<br>
   <% end %>
+  <%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
 
 <% end %>
 

@@ -6,11 +6,8 @@ email:
 phone_number:
   name: Phone 
 
-twitter:
-  name: Twitter 
-
 address:
   name: Address
 
-viadeo:
-  name: Viadeo
+skype:
+  name: Skype
