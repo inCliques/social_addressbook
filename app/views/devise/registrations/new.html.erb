@@ -8,8 +8,14 @@
   <div><%= f.label :name %><br />
   <%= f.text_field :name, :value => params[:name] %></div>
 
+  
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, :value => params[:email] %></div>
+  <% if params[:email].nil? or params[:email].empty? %> 
+    <%= f.email_field :email %></div>
+  <% else %>
+    <%= f.hidden_field :email, :value => params[:email],  %></div>
+    <p><b><%= params[:email] %></b></p></br>
+  <% end %>
 
   <div><%= f.label :password %><br />
   <%= f.password_field :password %></div>
