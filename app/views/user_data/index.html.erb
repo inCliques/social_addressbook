@@ -88,8 +88,25 @@ table.editUserProfile td {
 <%= link_to "Change password", edit_user_registration_path %>
 
 
+<% if @authentications %>
+  <% unless @authentications.empty? %>
+    <p><strong>Your account is connected to these social networks:</strong></p>
+    <div class="authentications">
+      <% for authentication in @authentications %>
+        <div class="authentication">
+          <%= image_tag "#{authentication.provider}_32.png", :size => "32x32" %>
+          <div class="provider"><%= authentication.provider.titleize %></div>
+          <div class="uid"><%= authentication.uid %></div>
+          <%= link_to "X", authentication, :confirm => "Are you sure you want to remove your #{authentication.provider} connection?", :method => :delete, :class => "remove" %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+<% end %>
+
 <br>
-  <br>
+
 <% @data_types.each do |data_type|  %>
 
   <% if data_type.name == 'Name'
@@ -126,29 +143,16 @@ table.editUserProfile td {
 		</table>
 		<br>
   <% end %>
-  <%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
 
 <% end %>
 
-<% if @authentications %>
-  <% unless @authentications.empty? %>
-    <p><strong>Your account is connected to these social networks:</strong></p>
-    <div class="authentications">
-      <% for authentication in @authentications %>
-        <div class="authentication">
-          <%= image_tag "#{authentication.provider}_32.png", :size => "32x32" %>
-          <div class="provider"><%= authentication.provider.titleize %></div>
-          <div class="uid"><%= authentication.uid %></div>
-          <%= link_to "X", authentication, :confirm => "Are you sure you want to remove your #{authentication.provider} connection?", :method => :delete, :class => "remove" %>
-        </div>
-      <% end %>
-      <div class="clear"></div>
-    </div>
-  <% end %>
+<p>Add a new 
+<% @data_types.each do |data_type|  %>
+  <u><%= link_to "#{data_type.name}, ", new_user_datum_path(:type => data_type.name) %></u>
 <% end %>
 
-<p><strong>Connect to your social networks:</strong></p>
-
+or connect to your social networks:</p>
+<br>
 <a href="/auth/viadeo" class="auth_provider">
   <%= image_tag "viadeo_64.png", :size => "64x64", :alt => "Viadeo" %>
   Viadeo
@@ -170,3 +174,4 @@ table.editUserProfile td {
   <%#<%= image_tag "openid_64.png", :size => "64x64", :alt => "OpenID" %>
   <%#OpenID%>
 <%#</a>%>
+
