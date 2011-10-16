@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20111015140031) do
     t.integer  "data_type_id"
     t.string   "name"
     t.string   "value"
-    t.boolean  "verified"
+    t.boolean  "verified",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
