@@ -32,6 +32,11 @@ body{
 	height: 25px;
 	background-color: #000;
 }
+
+#top-bar p{
+  color: #000;
+  
+}
 /*Contains everything below the top bar!*/
 #container{
  /* 474744 */
