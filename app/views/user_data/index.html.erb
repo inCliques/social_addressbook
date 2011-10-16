@@ -136,7 +136,7 @@ table.editUserProfile td {
 				<% if not user_datum.verified %>
 				<td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
 				<% end %>
-				<td><%= link_to 'DELETE ME', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
+				<td><%= link_to 'Delete', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
 			</tr>
 			<% i = i+1 %>
 			<% end %>
@@ -148,7 +148,7 @@ table.editUserProfile td {
 
 <p>Add a new 
 <% @data_types.each do |data_type|  %>
-  <u><%= link_to "#{data_type.name}, ", new_user_datum_path(:type => data_type.name) %></u>
+  <u><%= link_to "#{data_type.name}", new_user_datum_path(:type => data_type.name) %></u>, 
 <% end %>
 
 or connect to your social networks:</p>
