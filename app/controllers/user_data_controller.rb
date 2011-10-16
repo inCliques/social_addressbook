@@ -7,6 +7,7 @@ class UserDataController < ApplicationController
   # GET /user_data
   # GET /user_data.xml
   def index
+    @authentications = current_user.authentications if current_user
     @user_data = current_user.user_data
     @data_types = DataType.find(:all)
 

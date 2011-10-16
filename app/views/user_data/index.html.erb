@@ -1,4 +1,88 @@
+<style type="text/css">
+.authentications {
+  margin-bottom: 30px;
+}
 
+.authentication {
+  width: 130px;
+  float: left;
+  background-color: #EEE;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  position: relative;
+  margin-right: 10px;
+}
+
+.authentication .remove {
+  text-decoration: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: #333;
+  padding: 2px 4px;
+  font-size: 10px;
+}
+
+.authentication .remove:hover {
+  color: #CCC;
+  background-color: #777;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.authentication img {
+  float: left;
+  margin-right: 10px;
+}
+
+.authentication .provider {
+  font-weight: bold;
+}
+
+.authentication .uid {
+  color: #666;
+  font-size: 11px;
+}
+
+.auth_provider img {
+  display: block;
+}
+
+.auth_provider {
+  float: left;
+  text-decoration: none;
+  margin-right: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+table.editUserProfile {
+	border-width: 1px;
+	border-spacing: 3px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+}
+table.editUserProfile th {
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+table.editUserProfile td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+</style>
 
 <h1>Profile of <%= current_user.name %> </h1>
 <%= link_to "Change password", edit_user_registration_path %>
@@ -43,10 +127,45 @@
 		<br>
   <% end %>
 
-  <% if data_type.name == 'Viadeo'%>
-	<%= link_to 'Add Viadeo Profile', :controller => :viadeo_connect, :action => :step1 %>
-  <% else %>
-	<%= link_to "Add #{data_type.name} ", new_user_datum_path(:type => data_type.name) %>
-  <% end %>
-  <br>
 <% end %>
+
+<% if @authentications %>
+  <% unless @authentications.empty? %>
+    <p><strong>Your account is connected to these social networks:</strong></p>
+    <div class="authentications">
+      <% for authentication in @authentications %>
+        <div class="authentication">
+          <%= image_tag "#{authentication.provider}_32.png", :size => "32x32" %>
+          <div class="provider"><%= authentication.provider.titleize %></div>
+          <div class="uid"><%= authentication.uid %></div>
+          <%= link_to "X", authentication, :confirm => "Are you sure you want to remove your #{authentication.provider} connection?", :method => :delete, :class => "remove" %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+<% end %>
+
+<p><strong>Connect to your social networks:</strong></p>
+
+<a href="/auth/viadeo" class="auth_provider">
+  <%= image_tag "viadeo_64.png", :size => "64x64", :alt => "Viadeo" %>
+  Viadeo
+</a>
+<a href="/auth/twitter" class="auth_provider">
+  <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
+  Twitter
+</a>
+
+<%#<a href="/auth/facebook" class="auth_provider">%>
+  <%#<%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
+  <%#Facebook%>
+<%#</a>%>
+<%#<a href="/auth/google_apps" class="auth_provider">%>
+  <%#<%= image_tag "google_64.png", :size => "64x64", :alt => "Google" %>
+  <%#Google%>
+<%#</a>%>
+<%#<a href="/auth/open_id" class="auth_provider">%>
+  <%#<%= image_tag "openid_64.png", :size => "64x64", :alt => "OpenID" %>
+  <%#OpenID%>
+<%#</a>%>
