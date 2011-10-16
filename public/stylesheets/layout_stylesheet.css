@@ -94,8 +94,8 @@ height: 60px;
 .wide-box, .side-box, .main-box {
 	padding: 10px;
 	-webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 /* All boxes have 10 px padding inside, define and remove if needed.
  * The box model calculates padding so if removed must add difference to width.
@@ -121,8 +121,23 @@ border-radius: 5px;
 .margin-10 {
 	margin-top: 10px;
 }
+
+.signup-arrow {
+	padding: 0 20px 0 5px;
+}
+
 h2 {
     font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+h4 {
+    font-size: 0.9em;
     font-weight: bold;
     margin-bottom: 5px;
 }
