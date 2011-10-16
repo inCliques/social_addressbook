@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-<h1>>Clique name:</h1>
+<h2>Clique name:</h2>
   <%= @group.name %>
 <%= link_to 'Edit', edit_group_path(@group), :class => 'button primary icon edit' %>
 <%= link_to 'Delete group', @group, :confirm => 'Are you sure?', :method => :delete, :class => 'button primary danger icon remove' %>
