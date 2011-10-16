@@ -172,5 +172,8 @@ min-height: 200px;
 	padding: 5px 10px;
 }
 .side-menu a:link {
-	color: #FF000;
+	color: #FF0D00;
 }
+
+a, a:visited { color: #FF0D00; }
+a:hover { color: #ff4940;}
