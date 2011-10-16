@@ -1,5 +1,8 @@
 <h2>My cliques</h2>
 <table>
+<% if @my_groups.empty? %>
+  You don't have any Cliques yet, but why don't you just <%= link_to "create one?", new_group_path %>
+<% end %>
 <% @my_groups.each do |group| %>
   <tr>
     <td>
