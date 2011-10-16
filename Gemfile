@@ -7,6 +7,7 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3'
 gem 'devise', '1.4.7'
+gem 'omniauth'
 gem 'cancan'
 gem 'formtastic'
 gem 'configatron'
@@ -37,6 +38,7 @@ gem 'mysql2', '< 0.3'
 # end
 
 group :development, :test do
-  gem "ruby-debug19"
+  gem 'mocha'
+  gem 'nifty-generators'
+  gem 'ruby-debug19'
 end
-
