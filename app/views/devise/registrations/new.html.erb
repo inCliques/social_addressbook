@@ -1,20 +1,24 @@
+<div class="side-box">Placeholder</div>
+<div class="main-box">
 <h2>Sign up</h2>
 
-
-
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+ <%= devise_error_messages! %>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name, :value => params[:name] %></div>
+  <div>
+	  <%= f.label :name %><br />
+	  <%= f.text_field :name, :value => params[:name] %>
+  </div>
 
   
-  <div><%= f.label :email %><br />
+  <div>
+  <%= f.label :email %><br />
   <% if params[:email].nil? or params[:email].empty? %> 
-    <%= f.email_field :email %></div>
-  <% else %>
-    <%= f.hidden_field :email, :value => params[:email],  %></div>
-    <p><b><%= params[:email] %></b></p></br>
+	  <%= f.email_field :email %></div>
+	<% else %>
+	  <%= f.hidden_field :email, :value => params[:email],  %>
+	  </div>
+	  <p><b><%= params[:email] %></b></p></br>
   <% end %>
 
   <div><%= f.label :password %><br />
@@ -27,3 +31,4 @@
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
+</div>
