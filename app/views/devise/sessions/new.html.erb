@@ -1,21 +1,15 @@
-<div class="centerAligned">
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-
+<div class="side-box">
   <h2>Sign in</h2>
 
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div>
     <%= f.label :email %><br />
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :size => 20 %>
   </div>
 
   <div>
     <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :size => 20 %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -30,4 +24,7 @@
   <% end %>
 
   <%= render :partial => "devise/shared/links" %>
+</div>
+<div class="main-box">
+Sometext
 </div>
