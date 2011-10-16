@@ -18,7 +18,7 @@
 				Signed in as <b> <%= current_user.email %></b>. Not you?
 				<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 				<% end %>
-			<p class="notice"><%= notice %></p>
+			<br><p class="notice"><%= notice %></p>
 			<p class="alert"><%= alert %></p>
 			</div>
 		</div>
