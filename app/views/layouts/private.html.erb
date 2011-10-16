@@ -38,9 +38,8 @@
 			<div id="content-container" class="clearfix">
 				<!-- Start of content -->
 				<section>
-					<div class="side-box">
+					<div class="side-box side-menu">
 						<% if user_signed_in? %>
-						<div id="left_panel">
 						  <ul>
 							  <li>
 								  <%= link_to "My cliques", groups_path %>
@@ -52,7 +51,6 @@
 								  <%= link_to "My profile", user_data_path %>
 							  </li>
 						 </ul>
-						</div>
 						<% end %>
 					</div>
 
