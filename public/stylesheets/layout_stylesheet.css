@@ -168,8 +168,8 @@ min-height: 200px;
 	background-color: #DDD;
 }
 
-a, a:visited { color: #24913C; font-weight: bold; background-color: #DDD;}
-a:hover { color: #A61000; background-color: #DDD;}
+a, a:visited { color: #24913C; font-weight: bold; }
+a:hover { color: #A61000; background-color: #FFF;}
 
 
 /* User data style moved.*/
