@@ -260,4 +260,4 @@ table.editUserProfile td {
 /*Karina style: tables*/
 table, tr, th, td{border-collapse: collapse; text-align:left;}
 table{width:600px;}
-th{border-bottom: 2px solid #000000;}
+th{border-bottom: 2px solid #000000; font-weight:bold;}
