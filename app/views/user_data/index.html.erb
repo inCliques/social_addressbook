@@ -35,6 +35,8 @@
 				<th>Name</th>
 				<th>Value</th>
 				<th>Verified</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
 			</tr>
 			<% i = 0 %>
 			<% @user_data.where(:data_type_id => data_type.id).each do |user_datum| %>
@@ -46,7 +48,7 @@
 			>
 				<td><%= user_datum.name %></td>
 				<td><%= user_datum.value %></td>
-				<td>
+					<td>
 				<% if user_datum.verified == true %>
 				<%= image_tag "verified.png", :size => "80x25", :alt => "Verified" %>
 				<% else %>
@@ -55,6 +57,7 @@
 				</td>
 				<% if not user_datum.verified %>
 				<td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
+
 				<% end %>
 				<td><%= link_to 'Delete', user_datum, :confirm => 'Are you sure?', :method => :delete %></td>
 			</tr>

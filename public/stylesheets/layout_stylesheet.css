@@ -142,17 +142,6 @@ h4 {
     margin-bottom: 5px;
 }
 
-/*Table*/
-
-table{border-collapse: collapse;}
-
-th{
-border-bottom: #043B12 1px solid;
-text-align: left;
-}
-td,th{
-min-width: 150px; padding: 4px;
-}
 .odd{
 background-color: #DEFAE6;
 }
@@ -242,7 +231,7 @@ a:hover { color: #A61000; background-color: #DDD;}
   text-align: center;
   margin-bottom: 10px;
 }
-
+/*
 table.editUserProfile {
 	border-width: 1px;
 	border-spacing: 3px;
@@ -267,3 +256,8 @@ table.editUserProfile td {
 	background-color: white;
 	-moz-border-radius: ;
 }
+*/
+/*Karina style: tables*/
+table, tr, th, td{border-collapse: collapse; text-align:left;}
+table{width:600px;}
+th{border-bottom: 2px solid #000000;}
