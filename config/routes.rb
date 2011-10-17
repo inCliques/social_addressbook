@@ -65,12 +65,13 @@ SocialAddressbook::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  authenticate :user do
+  authenticated :user do
     root :to => "groups#index"
   end
-  root :to => "welcomes#index"
+  devise_for :users do
+    get "/", :to => "devise/sessions#new"
+  end
+  root :to => "devise/sessions#new"
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
