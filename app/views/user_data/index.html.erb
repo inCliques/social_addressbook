@@ -46,7 +46,13 @@
 			>
 				<td><%= user_datum.name %></td>
 				<td><%= user_datum.value %></td>
-				<td><%= user_datum.verified %></td>
+				<td>
+				<% if user_datum.verified == true %>
+				<%= image_tag "verified.png", :size => "80x25", :alt => "Verified" %>
+				<% else %>
+				<%= image_tag "unverified.png", :size => "80x25", :alt => "Unverified" %>
+				<% end %>
+				</td>
 				<% if not user_datum.verified %>
 				<td><%= link_to 'Edit', edit_user_datum_path(user_datum) %></td>
 				<% end %>
