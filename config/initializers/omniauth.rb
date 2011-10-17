@@ -13,4 +13,5 @@ configatron.twitter.configure_from_hash({
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :twitter, configatron.twitter.client_key, configatron.twitter.client_secret
   provider :viadeo, configatron.viadeo.client_key, configatron.viadeo.client_secret
+	{:client_options => {:ssl => {:ca_path => "/System/Library/OpenSSL/certs"}}}  # Modify this with your SSL certificates path
 end
