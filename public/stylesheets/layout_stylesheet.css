@@ -57,7 +57,7 @@ height: 150px;
 
 }
 #incliques{margin-top: 3px;}
-#logo-bar{
+#logo-bar, #navigation{
 color: white;
 position:relative;
 top: -40px;
