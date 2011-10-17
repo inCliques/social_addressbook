@@ -168,12 +168,16 @@ min-height: 200px;
 	margin: 0;
 }
 .side-menu  li {
-	display: block;
-	padding: 5px 10px;
 }
 .side-menu a:link {
-	color: #FF0D00;
+	color: #24913C;
+	padding: 5px 10px;
+	display: block;
+}
+.side-menu a:hover {
+	color: #A61000;
+	background-color: #EEE;
 }
 
-a, a:visited { color: #FF0D00; }
-a:hover { color: #ff4940; font-weight: bold;}
+a, a:visited { color: #24913C; font-weight: bold;}
+a:hover { color: #A61000;}
