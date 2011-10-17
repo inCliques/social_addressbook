@@ -24,6 +24,17 @@
   <% end %>
 
   <%= render :partial => "devise/shared/links" %>
+  <p>Sign in using your favorite network</p>
+  <div>
+  <a href="/auth/viadeo" class="auth_provider">
+    <%= image_tag "viadeo_64.png", :size => "64x64", :alt => "Viadeo" %>
+    Viadeo
+  </a>
+  <a href="/auth/twitter" class="auth_provider">
+    <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
+    Twitter
+  </a>
+  </div>
 </div>
 <div class="main-box">
 Sometext

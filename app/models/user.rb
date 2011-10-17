@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :user_data, :dependent => :destroy
 
-  after_create :set_default_role, :create_default_data_fields # TODO: import_clique should be called after_verification instead after_create
+  # TODO: import_clique should be called after_verification instead after_create
+  after_create :set_default_role, :create_default_data_fields
 
   def find_datum_of_type(type_name)
     data_type_id = DataType.first(:conditions => { :name => type_name }).id
@@ -82,6 +83,7 @@ class User < ActiveRecord::Base
 
   def apply_omniauth(omniauth)
     self.email = omniauth['user_info']['email'] if email.blank?
+    self.name = omniauth['user_info']['name'] if name.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 

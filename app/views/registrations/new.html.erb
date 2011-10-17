@@ -7,7 +7,7 @@
 
   <div>
 	  <%= f.label :name %><br />
-	  <%= f.text_field :name, :value => params[:name] %>
+	  <%= f.text_field :name, :value => @user.name or params[:name] %>
   </div>
 
   
@@ -21,11 +21,13 @@
 	  <p><b><%= params[:email] %></b></p></br>
   <% end %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <% if @user.password_required? %>
+    <div><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+    <div><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></div>
+  <% end %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

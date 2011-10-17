@@ -6,7 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.rememberable
       t.trackable
 
-      t.string :name, :null => false, :default => "My name"
+      t.string :name, :null => false
 
       # t.encryptable
       t.confirmable

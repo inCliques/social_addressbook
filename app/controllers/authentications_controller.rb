@@ -2,14 +2,14 @@ class AuthenticationsController < ApplicationController
 
   def create
     omniauth = request.env["omniauth.auth"]
-    print omniauth.to_yaml
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+
     # Already authenticated
     if authentication
       flash[:notice] = "Already connected to #{omniauth['provider']}. To connect with a different account, please sign out of #{omniauth['provider']}."
       # FIXME: This will only redirect, but not sign the user in
-      redirect_to user_data_url
-      #sign_in_and_redirect(:user, authentication.user)
+      sign_in_and_redirect(:user, authentication.user)
+    # Not authenticated, but already signed in
     elsif current_user
       authentication = current_user.authentications.new(:provider => omniauth['provider'], :uid => omniauth['uid'])
       authentication.token = omniauth['credentials']['token'] or ''
@@ -19,12 +19,12 @@ class AuthenticationsController < ApplicationController
       #UserDatum.create!(:user_id => current_user, :data_type_id => DataType.find_by_name(omniauth['provider']), :value => omniauth['uid'])
       # Import viadeo contact cards
       if omniauth['provider'] == 'viadeo'
-        print "Import viadeo contact cards"
         import_viadeo_contact_card(omniauth)
       end
       flash[:notice] = "Successfully connected to #{omniauth['provider']}."
       # FIXME: This should redirect to the import dialog for the provider
       redirect_to user_data_url
+
     # FIXME: We don't currently allow users to sign up via OAuth, so won't hit this case
     else
       user = User.new
@@ -59,7 +59,6 @@ class AuthenticationsController < ApplicationController
   def import_viadeo_contact_card(omniauth)
     url = "#{configatron.viadeo.api_base}/#{omniauth['uid']}/contact_cards?access_token=#{omniauth['credentials']['token']}"
     rep = JSON.parse(get_json_from_https(url))
-    print rep.to_yaml
     rep['data'].each do |item|
       # import address
       #UserDatum.create(:user => current_user, :data_type => DataType.first( :conditions => { :name => 'Email' } ), :name => 'Viadeo', :value => email, :verified => false)
@@ -112,6 +111,15 @@ class AuthenticationsController < ApplicationController
     end  
   
      return resp.body  
+  end
+
+  protected
+
+  # This is necessary since Rails 3.0.4
+  # See https://github.com/intridea/omniauth/issues/185
+  # and http://www.arailsdemo.com/posts/44
+  def handle_unverified_request
+    true
   end
 
 end
