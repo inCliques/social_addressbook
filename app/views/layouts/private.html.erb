@@ -76,8 +76,44 @@
 					<div class="wide-box margin-10">
 					<a href="http://www.incliqu.es/blog/about-us/">About Us</a> | <a href="http://www.incliqu.es/blog/">Blog</a> | <a href="http://www.incliqu.es/betasignup.php">Sign up for our Beta</a>
 					</div>
+					
 				</footer>
 			</div>
 		</div>
+		<!-- Start of Google Analytics Code -->
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-26378944-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+		<!-- End of Google Analytics Code -->
+
+		<!-- Start of Woopra Code -->
+		<script type="text/javascript">
+		function woopraReady(tracker) {
+		    tracker.setDomain('incliques.heroku.com');
+		    tracker.setIdleTimeout(300000);
+		    tracker.track();
+		    return false;
+		}
+		(function() {
+		    var wsc = document.createElement('script');
+		    wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+		    wsc.type = 'text/javascript';
+		    wsc.async = true;
+		    var ssc = document.getElementsByTagName('script')[0];
+		    ssc.parentNode.insertBefore(wsc, ssc);
+		})();
+		</script>
+		<!-- End of Woopra Code -->
+		
 	</body>
 </html>
