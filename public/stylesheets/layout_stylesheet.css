@@ -22,9 +22,27 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
  */
 
 body{
-	font-family: tahoma, sans-serif;
+	font-family: 'Terminal Dosis', tahoma, sans-serif;
 	font-size: 16px;
 	background-color: #f9f5dc;
+	color: #000;
+}
+b{font-weight: 700;}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+h4 {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 #top-bar{
@@ -33,7 +51,7 @@ body{
 	background-color: #000;
 }
 
-#top-bar p{
+#top-bar{
   color: #000;
 }
 /*Contains everything below the top bar!*/
@@ -126,21 +144,7 @@ height: 60px;
 	padding: 0 20px 0 5px;
 }
 
-h2 {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-h3 {
-    font-size: 1em;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-h4 {
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+
 
 .odd{
 background-color: #DEFAE6;
