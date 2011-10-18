@@ -26,6 +26,8 @@ body{
 	font-size: 16px;
 	background-color: #f9f5dc;
 	color: #000;
+	line-height: 25px;
+	letter-spacing: 1px;
 }
 b{font-weight: 700;}
 
