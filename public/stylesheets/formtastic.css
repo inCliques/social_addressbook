@@ -281,12 +281,17 @@ This stylesheet forms part of the Formtastic Rails Plugin
 
 .formtastic fieldset.inline_fields  li {
   float: left;
-  margin-right: 1em;
 } 
 
-/* FIXME: these labels should not show */
 .formtastic fieldset.inline_fields label {
   color:red;
   display:none;
-  width:0;
+}
+
+.formtastic fieldset.inline_fields .left {
+  width: 25%;
+}
+
+.formtastic fieldset.inline_fields .right {
+  width: 75%;
 }

@@ -25,8 +25,8 @@
 <%= semantic_form_for(:user_datum, :url => { :class => "group", :action => "invite_save" }) do |f| %>
   <%= f.input :name, :label => "Name" %>
   <%= f.inputs :class => 'inline_fields' do%>
-    <%= f.input :data_type_id, :label => "Type", :as => :select, :collection => DataType.find(:all), :prompt => "[select type]", :class => "fragment" %>
-    <%= f.input :value, :label => "Address" %>
+    <%= f.input :data_type_id, :label => "Type", :as => :select, :collection => DataType.find(:all), :prompt => "[select type]", :wrapper_html => { :class => "left" } %>
+    <%= f.input :value, :class => "right", :label => "Address", :wrapper_html => { :class => "left" } %>
   <% end %>
   <%= f.commit_button :label => "Invite to clique" %>
 <% end %>
