@@ -272,3 +272,21 @@ This stylesheet forms part of the Formtastic Rails Plugin
   margin:0;
   padding:0;
 }
+
+/* CUSTOMIZATION
+--------------------------------------------------------------------------------------------------*/
+.formtastic fieldset.inline_fields  ol {
+  margin: 0;
+}
+
+.formtastic fieldset.inline_fields  li {
+  float: left;
+  margin-right: 1em;
+} 
+
+/* FIXME: these labels should not show */
+.formtastic fieldset.inline_fields label {
+  color:red;
+  display:none;
+  width:0;
+}
