@@ -15,7 +15,8 @@ class UserDatum < ActiveRecord::Base
                 "Viadeo" => ['ProfileURL'],
                 "Twitter" => ['Public', 'Private'],
                 "Phone" => ['Personal', 'Work', 'Mobile', 'Fax'], 
-                "Address" => ['Personal', 'Work'], 
+                "Address" => ['Personal', 'Work'],
+                "Skype" => ['Personal', 'Professional'],
                 "Name" => []] 
   end
 
